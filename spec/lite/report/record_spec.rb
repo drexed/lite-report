@@ -24,7 +24,7 @@ RSpec.describe Lite::Report::Record do
     ]
   end
 
-  context 'export stream' do
+  context 'when exporting stream' do
     it 'returns true for query class' do
       Car.create!(hash_type_1)
 
@@ -34,7 +34,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'export to csv all data for an' do
+  context 'when exporting to csv all data for an' do
     it 'array of records from a Class dump' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -54,7 +54,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'export to csv all data for an' do
+  context 'when exporting to csv all data for an' do
     it 'array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -74,7 +74,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'export to csv only values for an' do
+  context 'when exporting to csv only values for an' do
     it 'array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -96,7 +96,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'export to csv except values for an' do
+  context 'when exporting to csv except values for an' do
     it 'array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -118,7 +118,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'export to csv with headers for an' do
+  context 'when exporting to csv with headers for an' do
     it 'array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -140,7 +140,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'export to csv with options for an' do
+  context 'when exporting to csv with options for an' do
     it 'array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -162,7 +162,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'import csv without headers to create' do
+  context 'when importing csv without headers to create' do
     it '3 cars' do
       described_class.import(multi_all_path,
                              model: Car)
@@ -178,7 +178,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'import csv with headers to create' do
+  context 'when importing csv with headers to create' do
     it '3 cars' do
       described_class.import(multi_headerless_path,
                              model: Car,
@@ -196,7 +196,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'import csv only values to create' do
+  context 'when importing csv only values to create' do
     it '3 cars' do
       described_class.import(multi_headerless_path,
                              model: Car,
@@ -216,7 +216,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'import csv except values to create' do
+  context 'when importing csv except values to create' do
     it '3 cars' do
       described_class.import(multi_headerless_path,
                              model: Car,
@@ -236,7 +236,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'import csv with options to create' do
+  context 'when importing csv with options to create' do
     it '3 cars' do
       described_class.import(multi_headerless_options_path,
                              model: Car,

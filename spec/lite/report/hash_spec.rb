@@ -15,7 +15,7 @@ RSpec.describe Lite::Report::Hash do
       'Crash safety rated' => true, 'Created at' => '2014-08-22T20:59:34.000Z'
     }
   end
-  let(:array_type_1) do
+  let(:solo_array_string) do
     [
       {
         'Id' => '1', 'Name' => 'Ferrari', 'Speed' => '235', 'Hp' => '630',
@@ -31,7 +31,7 @@ RSpec.describe Lite::Report::Hash do
       }
     ]
   end
-  let(:array_type_2) do
+  let(:solo_array_typecast) do
     [
       {
         'Id' => 1, 'Name' => 'Ferrari', 'Speed' => 235, 'Hp' => 630,
@@ -48,18 +48,18 @@ RSpec.describe Lite::Report::Hash do
     ]
   end
 
-  context 'export stream' do
+  context 'when exporting stream' do
     it 'returns true' do
-      ccsv = described_class.export(array_type_1, stream: true)
+      ccsv = described_class.export(solo_array_string, stream: true)
 
       expect(ccsv.is_a?(Enumerator)).to eq(true)
     end
   end
 
-  context 'export to csv all data for an' do
+  context 'when exporting to csv all data for an' do
     it 'array of hashes' do
       sarr = File.read(multi_all_path)
-      ccsv = described_class.export(array_type_1)
+      ccsv = described_class.export(solo_array_string)
 
       expect(ccsv).to eq(sarr)
     end
@@ -72,10 +72,10 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'export to csv only values for an' do
+  context 'when exporting to csv only values for an' do
     it 'array of hashes' do
       sarr = File.read(multi_only_path)
-      ccsv = described_class.export(array_type_1,
+      ccsv = described_class.export(solo_array_string,
                                     only: only_except_2)
 
       expect(ccsv).to eq(sarr)
@@ -90,10 +90,10 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'export to csv except values for an' do
+  context 'when exporting to csv except values for an' do
     it 'array of hashes' do
       sarr = File.read(multi_except_path)
-      ccsv = described_class.export(array_type_1,
+      ccsv = described_class.export(solo_array_string,
                                     except: only_except_2)
 
       expect(ccsv).to eq(sarr)
@@ -108,10 +108,10 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'export to csv with headers for an' do
+  context 'when exporting to csv with headers for an' do
     it 'array of hashes' do
       sarr = File.read(multi_headers_path)
-      ccsv = described_class.export(array_type_1,
+      ccsv = described_class.export(solo_array_string,
                                     headers: header_type_2)
 
       expect(ccsv).to eq(sarr)
@@ -126,10 +126,10 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'export to csv with options for an' do
+  context 'when exporting to csv with options for an' do
     it 'array of hashes' do
       sarr = File.read(multi_options_path)
-      ccsv = described_class.export(array_type_1,
+      ccsv = described_class.export(solo_array_string,
                                     options: options)
 
       expect(ccsv).to eq(sarr)
@@ -144,17 +144,17 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'import csv without headers returns' do
+  context 'when importing csv without headers returns' do
     it 'an array of hashes' do
       carr = described_class.import(multi_all_path)
 
-      expect(carr).to eq(array_type_1)
+      expect(carr).to eq(solo_array_string)
     end
 
     it 'an evaluated array of hashes' do
       carr = described_class.evaluate.import(multi_all_path)
 
-      expect(carr).to eq(array_type_2)
+      expect(carr).to eq(solo_array_typecast)
     end
 
     it 'a hash' do
@@ -170,19 +170,19 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'import csv with headers returns' do
+  context 'when importing csv with headers returns' do
     it 'an array of hashes' do
       carr = described_class.import(multi_headerless_path,
                                     headers: header_type_1)
 
-      expect(carr).to eq(array_type_1)
+      expect(carr).to eq(solo_array_string)
     end
 
     it 'an evaluated array of hashes' do
       carr = described_class.evaluate.import(multi_headerless_path,
                                              headers: header_type_1)
 
-      expect(carr).to eq(array_type_2)
+      expect(carr).to eq(solo_array_typecast)
     end
 
     it 'a hash' do
@@ -200,9 +200,9 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'import csv only values returns' do
+  context 'when importing csv only values returns' do
     it 'an array of arrays' do
-      sarr = array_type_1.dup.map { |v| v.dup.keep_if { |k, _v| only_except_2.include?(k) } }
+      sarr = solo_array_string.dup.map { |v| v.dup.keep_if { |k, _v| only_except_2.include?(k) } }
       carr = described_class.import(multi_headerless_path,
                                     headers: header_type_1,
                                     only: only_except_2)
@@ -211,7 +211,7 @@ RSpec.describe Lite::Report::Hash do
     end
 
     it 'an evaluated array of arrays' do
-      sarr = array_type_2.dup.map { |v| v.dup.keep_if { |k, _v| only_except_2.include?(k) } }
+      sarr = solo_array_typecast.dup.map { |v| v.dup.keep_if { |k, _v| only_except_2.include?(k) } }
       carr = described_class.evaluate.import(multi_headerless_path,
                                              headers: header_type_1,
                                              only: only_except_2)
@@ -238,9 +238,9 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'import csv except values returns' do
+  context 'when importing csv except values returns' do
     it 'an array of arrays' do
-      sarr = array_type_1.dup.map { |v| v.dup.delete_if { |k, _v| only_except_2.include?(k) } }
+      sarr = solo_array_string.dup.map { |v| v.dup.delete_if { |k, _v| only_except_2.include?(k) } }
       carr = described_class.import(multi_headerless_path,
                                     headers: header_type_1,
                                     except: only_except_2)
@@ -249,7 +249,7 @@ RSpec.describe Lite::Report::Hash do
     end
 
     it 'an evaluated array of arrays' do
-      sarr = array_type_2.dup.map { |v| v.dup.delete_if { |k, _v| only_except_2.include?(k) } }
+      sarr = solo_array_typecast.dup.map { |v| v.dup.delete_if { |k, _v| only_except_2.include?(k) } }
       carr = described_class.evaluate.import(multi_headerless_path,
                                              headers: header_type_1,
                                              except: only_except_2)
@@ -276,13 +276,13 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'import csv with options returns' do
+  context 'when importing csv with options returns' do
     it 'an array of hashes' do
       carr = described_class.import(multi_headerless_options_path,
                                     headers: header_type_1,
                                     options: options)
 
-      expect(carr).to eq(array_type_1)
+      expect(carr).to eq(solo_array_string)
     end
 
     it 'an evaluated array of hashes' do
@@ -290,7 +290,7 @@ RSpec.describe Lite::Report::Hash do
                                              headers: header_type_1,
                                              options: options)
 
-      expect(carr).to eq(array_type_2)
+      expect(carr).to eq(solo_array_typecast)
     end
 
     it 'a hash' do

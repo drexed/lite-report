@@ -3,61 +3,24 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Report::Array do
-  let(:header_type_1) do
-    ['Id', 'Name', 'Speed', 'Hp', 'Crash safety rated', 'Created at']
-  end
-  let(:header_type_2) do
-    ['No.', 'Model', 'Speed', 'Horse Power', 'Crash Safety Rated', 'Driven On']
-  end
-  let(:array_type_1) do
-    ['1', 'Porche', '225', '430', 'true', '2014-08-22T20:59:34.000Z']
-  end
-  let(:array_type_2) do
-    [1, 'Porche', 225, 430, true, '2014-08-22T20:59:34.000Z']
-  end
-  let(:array_type_3) do
-    [
-      ['1', 'Ferrari', '235', '630', 'true', '2014-08-23T20:59:34.000Z'],
-      ['2', 'Lamborghini', '245', '720', 'true', '2014-08-24T20:59:34.000Z'],
-      ['3', 'Bugatti', '256', '1001', 'false', '2014-08-25T20:59:34.000Z']
-    ]
-  end
-  let(:array_type_4) do
-    [
-      [1, 'Ferrari', 235, 630, true, '2014-08-23T20:59:34.000Z'],
-      [2, 'Lamborghini', 245, 720, true, '2014-08-24T20:59:34.000Z'],
-      [3, 'Bugatti', 256, 1001, false, '2014-08-25T20:59:34.000Z']
-    ]
-  end
 
-  context 'export stream' do
-    it 'returns true' do
-      ccsv = described_class.export(array_type_3, stream: true)
-
-      expect(ccsv.is_a?(Enumerator)).to eq(true)
-    end
-  end
-
-  context 'export to csv without headers for an' do
+  context 'when exporting to csv without headers for an' do
     it 'array of arrays' do
-      sarr = File.read(multi_headerless_path)
-      ccsv = described_class.export(array_type_3)
-
-      expect(ccsv).to eq(sarr)
+      export!(:multi_headerless, multi_array_string)
     end
 
     it 'array' do
       sarr = File.read(solo_headerless_path)
-      ccsv = described_class.export(array_type_1)
+      ccsv = described_class.export(solo_array_string)
 
       expect(ccsv).to eq(sarr)
     end
   end
 
-  context 'export to csv with headers for an' do
+  context 'when exporting to csv with headers for an' do
     it 'array of arrays' do
       sarr = File.read(multi_headers_path)
-      ccsv = described_class.export(array_type_3,
+      ccsv = described_class.export(multi_array_string,
                                     headers: header_type_2)
 
       expect(ccsv).to eq(sarr)
@@ -65,17 +28,17 @@ RSpec.describe Lite::Report::Array do
 
     it 'array' do
       sarr = File.read(solo_headers_path)
-      ccsv = described_class.export(array_type_1,
+      ccsv = described_class.export(solo_array_string,
                                     headers: header_type_2)
 
       expect(ccsv).to eq(sarr)
     end
   end
 
-  context 'export to csv with options for an' do
+  context 'when exporting to csv with options for an' do
     it 'array of arrays' do
       sarr = File.read(multi_options_path)
-      ccsv = described_class.export(array_type_3,
+      ccsv = described_class.export(multi_array_string,
                                     headers: header_type_1,
                                     options: options)
 
@@ -84,7 +47,7 @@ RSpec.describe Lite::Report::Array do
 
     it 'array' do
       sarr = File.read(solo_options_path)
-      ccsv = described_class.export(array_type_1,
+      ccsv = described_class.export(solo_array_string,
                                     headers: header_type_1,
                                     options: options)
 
@@ -92,89 +55,89 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  context 'import csv without headers returns an' do
+  context 'when importing csv without headers to be an' do
     it 'array of arrays' do
       carr = described_class.import(multi_headerless_path)
 
-      expect(carr).to eq(array_type_3)
+      expect(carr).to eq(multi_array_string)
     end
 
     it 'evaluated array of arrays' do
       carr = described_class.evaluate.import(multi_headerless_path)
 
-      expect(carr).to eq(array_type_4)
+      expect(carr).to eq(multi_array_typecast)
     end
 
     it 'array' do
       carr = described_class.import(solo_headerless_path)
 
-      expect(carr).to eq(array_type_1)
+      expect(carr).to eq(solo_array_string)
     end
 
     it 'evaluated array' do
       carr = described_class.evaluate.import(solo_headerless_path)
 
-      expect(carr).to eq(array_type_2)
+      expect(carr).to eq(solo_array_typecast)
     end
   end
 
-  context 'import csv with headers returns an' do
+  context 'when importing csv with headers to be an' do
     it 'array of arrays' do
       carr = described_class.import(multi_headerless_path,
                                     headers: header_type_1)
 
-      expect(carr).to eq(array_type_3.dup.unshift(header_type_1))
+      expect(carr).to eq(multi_array_string.dup.unshift(header_type_1))
     end
 
     it 'evaluated array of arrays' do
       carr = described_class.evaluate.import(multi_headerless_path,
                                              headers: header_type_1)
 
-      expect(carr).to eq(array_type_4.dup.unshift(header_type_1))
+      expect(carr).to eq(multi_array_typecast.dup.unshift(header_type_1))
     end
 
     it 'array' do
       carr = described_class.import(solo_headerless_path,
                                     headers: header_type_1)
 
-      expect(carr).to eq([].push(header_type_1).push(array_type_1))
+      expect(carr).to eq([].push(header_type_1).push(solo_array_string))
     end
 
     it 'evaluated array' do
       carr = described_class.evaluate.import(solo_headerless_path,
                                              headers: header_type_1)
 
-      expect(carr).to eq([].push(header_type_1).push(array_type_2))
+      expect(carr).to eq([].push(header_type_1).push(solo_array_typecast))
     end
   end
 
-  context 'import csv with options returns an' do
+  context 'when importing csv with options to be an' do
     it 'array of arrays' do
       carr = described_class.import(multi_options_path,
                                     options: options)
 
-      expect(carr).to eq([].push(header_type_1).concat(array_type_3))
+      expect(carr).to eq([].push(header_type_1).concat(multi_array_string))
     end
 
     it 'evaluated array of arrays' do
       carr = described_class.evaluate.import(multi_options_path,
                                              options: options)
 
-      expect(carr).to eq([].push(header_type_1).concat(array_type_4))
+      expect(carr).to eq([].push(header_type_1).concat(multi_array_typecast))
     end
 
     it 'array' do
       carr = described_class.import(solo_options_path,
                                     options: options)
 
-      expect(carr).to eq([].push(header_type_1).push(array_type_1))
+      expect(carr).to eq([].push(header_type_1).push(solo_array_string))
     end
 
     it 'evaluated array' do
       carr = described_class.evaluate.import(solo_options_path,
                                              options: options)
 
-      expect(carr).to eq([].push(header_type_1).push(array_type_2))
+      expect(carr).to eq([].push(header_type_1).push(solo_array_typecast))
     end
   end
 
