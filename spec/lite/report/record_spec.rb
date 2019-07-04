@@ -34,8 +34,8 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv all data for an' do
-    it 'array of records from a Class dump' do
+  context 'when exporting to csv all data' do
+    it 'to be an array of records from a Class dump' do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_all_path)
@@ -44,7 +44,7 @@ RSpec.describe Lite::Report::Record do
       expect(ccsv).to eq(sarr)
     end
 
-    it 'array of records from a ActiveRelation dump' do
+    it 'to be an array of records from a ActiveRelation dump' do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_dump_path)
@@ -54,8 +54,8 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv all data for an' do
-    it 'array of records' do
+  context 'when exporting to csv all data' do
+    it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_all_path)
@@ -74,8 +74,8 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv only values for an' do
-    it 'array of records' do
+  context 'when exporting to csv only values' do
+    it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_only_path)
@@ -96,8 +96,8 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv except values for an' do
-    it 'array of records' do
+  context 'when exporting to csv except values' do
+    it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_except_path)
@@ -118,8 +118,8 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv with headers for an' do
-    it 'array of records' do
+  context 'when exporting to csv with headers' do
+    it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_headers_path)
@@ -140,8 +140,8 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv with options for an' do
-    it 'array of records' do
+  context 'when exporting to csv with options' do
+    it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_options_path)

@@ -4,21 +4,18 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Array do
 
-  context 'when exporting to csv without headers for an' do
-    it 'array of arrays' do
+  context 'when exporting to csv without headers' do
+    it 'to be an array of arrays' do
       export!(:multi_headerless, multi_array_string)
     end
 
-    it 'array' do
-      sarr = File.read(solo_headerless_path)
-      ccsv = described_class.export(solo_array_string)
-
-      expect(ccsv).to eq(sarr)
+    it 'to be an array' do
+      export!(:solo_headerless, solo_array_string)
     end
   end
 
-  context 'when exporting to csv with headers for an' do
-    it 'array of arrays' do
+  context 'when exporting to csv with headers' do
+    it 'to be an array of arrays' do
       sarr = File.read(multi_headers_path)
       ccsv = described_class.export(multi_array_string,
                                     headers: header_type_2)
@@ -26,7 +23,7 @@ RSpec.describe Lite::Report::Array do
       expect(ccsv).to eq(sarr)
     end
 
-    it 'array' do
+    it 'to be an array' do
       sarr = File.read(solo_headers_path)
       ccsv = described_class.export(solo_array_string,
                                     headers: header_type_2)
@@ -35,8 +32,8 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  context 'when exporting to csv with options for an' do
-    it 'array of arrays' do
+  context 'when exporting to csv with options' do
+    it 'to be an array of arrays' do
       sarr = File.read(multi_options_path)
       ccsv = described_class.export(multi_array_string,
                                     headers: header_type_1,
@@ -45,7 +42,7 @@ RSpec.describe Lite::Report::Array do
       expect(ccsv).to eq(sarr)
     end
 
-    it 'array' do
+    it 'to be an array' do
       sarr = File.read(solo_options_path)
       ccsv = described_class.export(solo_array_string,
                                     headers: header_type_1,
@@ -56,7 +53,7 @@ RSpec.describe Lite::Report::Array do
   end
 
   context 'when importing csv without headers to be an' do
-    it 'array of arrays' do
+    it 'to be an array of arrays' do
       carr = described_class.import(multi_headerless_path)
 
       expect(carr).to eq(multi_array_string)
@@ -68,7 +65,7 @@ RSpec.describe Lite::Report::Array do
       expect(carr).to eq(multi_array_typecast)
     end
 
-    it 'array' do
+    it 'to be an array' do
       carr = described_class.import(solo_headerless_path)
 
       expect(carr).to eq(solo_array_string)
@@ -82,7 +79,7 @@ RSpec.describe Lite::Report::Array do
   end
 
   context 'when importing csv with headers to be an' do
-    it 'array of arrays' do
+    it 'to be an array of arrays' do
       carr = described_class.import(multi_headerless_path,
                                     headers: header_type_1)
 
@@ -96,7 +93,7 @@ RSpec.describe Lite::Report::Array do
       expect(carr).to eq(multi_array_typecast.dup.unshift(header_type_1))
     end
 
-    it 'array' do
+    it 'to be an array' do
       carr = described_class.import(solo_headerless_path,
                                     headers: header_type_1)
 
@@ -112,7 +109,7 @@ RSpec.describe Lite::Report::Array do
   end
 
   context 'when importing csv with options to be an' do
-    it 'array of arrays' do
+    it 'to be an array of arrays' do
       carr = described_class.import(multi_options_path,
                                     options: options)
 
@@ -126,7 +123,7 @@ RSpec.describe Lite::Report::Array do
       expect(carr).to eq([].push(header_type_1).concat(multi_array_typecast))
     end
 
-    it 'array' do
+    it 'to be an array' do
       carr = described_class.import(solo_options_path,
                                     options: options)
 

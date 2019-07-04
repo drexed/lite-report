@@ -56,8 +56,8 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'when exporting to csv all data for an' do
-    it 'array of hashes' do
+  context 'when exporting to csv all data' do
+    it 'to be an array of hashes' do
       sarr = File.read(multi_all_path)
       ccsv = described_class.export(solo_array_string)
 
@@ -72,8 +72,8 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'when exporting to csv only values for an' do
-    it 'array of hashes' do
+  context 'when exporting to csv only values' do
+    it 'to be an array of hashes' do
       sarr = File.read(multi_only_path)
       ccsv = described_class.export(solo_array_string,
                                     only: only_except_2)
@@ -90,8 +90,8 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'when exporting to csv except values for an' do
-    it 'array of hashes' do
+  context 'when exporting to csv except values' do
+    it 'to be an array of hashes' do
       sarr = File.read(multi_except_path)
       ccsv = described_class.export(solo_array_string,
                                     except: only_except_2)
@@ -108,8 +108,8 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'when exporting to csv with headers for an' do
-    it 'array of hashes' do
+  context 'when exporting to csv with headers' do
+    it 'to be an array of hashes' do
       sarr = File.read(multi_headers_path)
       ccsv = described_class.export(solo_array_string,
                                     headers: header_type_2)
@@ -126,8 +126,8 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  context 'when exporting to csv with options for an' do
-    it 'array of hashes' do
+  context 'when exporting to csv with options' do
+    it 'to be an array of hashes' do
       sarr = File.read(multi_options_path)
       ccsv = described_class.export(solo_array_string,
                                     options: options)
