@@ -2,6 +2,7 @@
 
 module Lite
   module Report
+
     class Configuration
 
       attr_accessor :csv_force_encoding, :csv_options, :import_adapter, :import_options

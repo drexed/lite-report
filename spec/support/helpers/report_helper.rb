@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ReportHelper
+
   extend RSpec::SharedContext
 
   # TODO:  remove this
@@ -26,10 +27,10 @@ module ReportHelper
   end
 
   let(:only_except_1) do
-    ['Name']
+    %w[Name]
   end
   let(:only_except_2) do
-    ['Id', 'Name']
+    %w[Id Name]
   end
 
   let(:header_type_1) do

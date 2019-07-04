@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 require 'spec_helper'
@@ -19,8 +18,8 @@ RSpec.describe Lite::Report::Record do
   end
   let(:hash_type_4) do
     [
-      { id: 1, name: 'Ferrari', speed: '235', hp: '630',  crash_safety_rated: 'true',  created_at: '2014-08-23T20:59:34.000Z' },
-      { id: 2, name: 'Lamborghini', speed: '245', hp: '720',  crash_safety_rated: 'true',  created_at: '2014-08-24T20:59:34.000Z' },
+      { id: 1, name: 'Ferrari', speed: '235', hp: '630', crash_safety_rated: 'true', created_at: '2014-08-23T20:59:34.000Z' },
+      { id: 2, name: 'Lamborghini', speed: '245', hp: '720', crash_safety_rated: 'true', created_at: '2014-08-24T20:59:34.000Z' },
       { id: 3, name: 'Bugatti', speed: '256', hp: '1001', crash_safety_rated: 'false', created_at: '2014-08-25T20:59:34.000Z' }
     ]
   end
@@ -29,7 +28,7 @@ RSpec.describe Lite::Report::Record do
     it 'returns true for query class' do
       Car.create!(hash_type_1)
 
-      ccsv = Lite::Report::Record.export(Car.all, stream: true)
+      ccsv = described_class.export(Car.all, stream: true)
 
       expect(ccsv.is_a?(Enumerator)).to eq(true)
     end
@@ -40,7 +39,7 @@ RSpec.describe Lite::Report::Record do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_all_path)
-      ccsv = Lite::Report::Record.export(Car)
+      ccsv = described_class.export(Car)
 
       expect(ccsv).to eq(sarr)
     end
@@ -49,7 +48,7 @@ RSpec.describe Lite::Report::Record do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_dump_path)
-      ccsv = Lite::Report::Record.export(Car.where(speed: 235..245))
+      ccsv = described_class.export(Car.where(speed: 235..245))
 
       expect(ccsv).to eq(sarr)
     end
@@ -60,7 +59,7 @@ RSpec.describe Lite::Report::Record do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_all_path)
-      ccsv = Lite::Report::Record.export(Car.all)
+      ccsv = described_class.export(Car.all)
 
       expect(ccsv).to eq(sarr)
     end
@@ -69,7 +68,7 @@ RSpec.describe Lite::Report::Record do
       Car.create!(hash_type_1)
 
       sarr = File.read(solo_all_path)
-      ccsv = Lite::Report::Record.export(Car.first)
+      ccsv = described_class.export(Car.first)
 
       expect(ccsv).to eq(sarr)
     end
@@ -80,8 +79,8 @@ RSpec.describe Lite::Report::Record do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_only_path)
-      ccsv = Lite::Report::Record.export(Car.all,
-                                         only: [:id, :name])
+      ccsv = described_class.export(Car.all,
+                                    only: %i[id name])
 
       expect(ccsv).to eq(sarr)
     end
@@ -90,8 +89,8 @@ RSpec.describe Lite::Report::Record do
       Car.create!(hash_type_1)
 
       sarr = File.read(solo_only_path)
-      ccsv = Lite::Report::Record.export(Car.first,
-                                         only: :name)
+      ccsv = described_class.export(Car.first,
+                                    only: :name)
 
       expect(ccsv).to eq(sarr)
     end
@@ -102,8 +101,8 @@ RSpec.describe Lite::Report::Record do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_except_path)
-      ccsv = Lite::Report::Record.export(Car.all,
-                                         except: [:id, :name])
+      ccsv = described_class.export(Car.all,
+                                    except: %i[id name])
 
       expect(ccsv).to eq(sarr)
     end
@@ -112,8 +111,8 @@ RSpec.describe Lite::Report::Record do
       Car.create!(hash_type_1)
 
       sarr = File.read(solo_except_path)
-      ccsv = Lite::Report::Record.export(Car.first,
-                                         except: :name)
+      ccsv = described_class.export(Car.first,
+                                    except: :name)
 
       expect(ccsv).to eq(sarr)
     end
@@ -124,8 +123,8 @@ RSpec.describe Lite::Report::Record do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_headers_path)
-      ccsv = Lite::Report::Record.export(Car.all,
-                                         headers: header_type_2)
+      ccsv = described_class.export(Car.all,
+                                    headers: header_type_2)
 
       expect(ccsv).to eq(sarr)
     end
@@ -134,8 +133,8 @@ RSpec.describe Lite::Report::Record do
       Car.create!(hash_type_1)
 
       sarr = File.read(solo_headers_path)
-      ccsv = Lite::Report::Record.export(Car.first,
-                                         headers: header_type_2)
+      ccsv = described_class.export(Car.first,
+                                    headers: header_type_2)
 
       expect(ccsv).to eq(sarr)
     end
@@ -146,8 +145,8 @@ RSpec.describe Lite::Report::Record do
       hash_type_2.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_options_path)
-      ccsv = Lite::Report::Record.export(Car.all,
-                                         options: options)
+      ccsv = described_class.export(Car.all,
+                                    options: options)
 
       expect(ccsv).to eq(sarr)
     end
@@ -156,8 +155,8 @@ RSpec.describe Lite::Report::Record do
       Car.create!(hash_type_1)
 
       sarr = File.read(solo_options_path)
-      ccsv = Lite::Report::Record.export(Car.first,
-                                         options: options)
+      ccsv = described_class.export(Car.first,
+                                    options: options)
 
       expect(ccsv).to eq(sarr)
     end
@@ -165,15 +164,15 @@ RSpec.describe Lite::Report::Record do
 
   context 'import csv without headers to create' do
     it '3 cars' do
-      Lite::Report::Record.import(multi_all_path,
-                                  model: Car)
+      described_class.import(multi_all_path,
+                             model: Car)
 
       expect(Car.count).to eq(3)
     end
 
     it '1 car' do
-      Lite::Report::Record.import(solo_all_path,
-                                  model: Car)
+      described_class.import(solo_all_path,
+                             model: Car)
 
       expect(Car.count).to eq(1)
     end
@@ -181,17 +180,17 @@ RSpec.describe Lite::Report::Record do
 
   context 'import csv with headers to create' do
     it '3 cars' do
-      Lite::Report::Record.import(multi_headerless_path,
-                                  model: Car,
-                                  headers: header_type_1)
+      described_class.import(multi_headerless_path,
+                             model: Car,
+                             headers: header_type_1)
 
       expect(Car.count).to eq(3)
     end
 
     it '1 car' do
-      Lite::Report::Record.import(solo_headerless_path,
-                                  model: Car,
-                                  headers: header_type_1)
+      described_class.import(solo_headerless_path,
+                             model: Car,
+                             headers: header_type_1)
 
       expect(Car.count).to eq(1)
     end
@@ -199,19 +198,19 @@ RSpec.describe Lite::Report::Record do
 
   context 'import csv only values to create' do
     it '3 cars' do
-      Lite::Report::Record.import(multi_headerless_path,
-                                  model: Car,
-                                  headers: header_type_1,
-                                  only: :name)
+      described_class.import(multi_headerless_path,
+                             model: Car,
+                             headers: header_type_1,
+                             only: :name)
 
       expect(Car.where.not(name: nil).count).to eq(3)
     end
 
     it '1 car' do
-      Lite::Report::Record.import(solo_headerless_path,
-                                  model: Car,
-                                  headers: header_type_1,
-                                  only: :name)
+      described_class.import(solo_headerless_path,
+                             model: Car,
+                             headers: header_type_1,
+                             only: :name)
 
       expect(Car.where.not(name: nil).count).to eq(1)
     end
@@ -219,19 +218,19 @@ RSpec.describe Lite::Report::Record do
 
   context 'import csv except values to create' do
     it '3 cars' do
-      Lite::Report::Record.import(multi_headerless_path,
-                                  model: Car,
-                                  headers: header_type_1,
-                                  except: :name)
+      described_class.import(multi_headerless_path,
+                             model: Car,
+                             headers: header_type_1,
+                             except: :name)
 
       expect(Car.where(name: nil).count).to eq(3)
     end
 
     it '1 car' do
-      Lite::Report::Record.import(solo_headerless_path,
-                                  model: Car,
-                                  headers: header_type_1,
-                                  except: :name)
+      described_class.import(solo_headerless_path,
+                             model: Car,
+                             headers: header_type_1,
+                             except: :name)
 
       expect(Car.where(name: nil).count).to eq(1)
     end
@@ -239,19 +238,19 @@ RSpec.describe Lite::Report::Record do
 
   context 'import csv with options to create' do
     it '3 cars' do
-      Lite::Report::Record.import(multi_headerless_options_path,
-                                  model: Car,
-                                  headers: header_type_1,
-                                  options: options)
+      described_class.import(multi_headerless_options_path,
+                             model: Car,
+                             headers: header_type_1,
+                             options: options)
 
       expect(Car.count).to eq(3)
     end
 
     it '1 car' do
-      Lite::Report::Record.import(solo_headerless_options_path,
-                                  model: Car,
-                                  headers: header_type_1,
-                                  options: options)
+      described_class.import(solo_headerless_options_path,
+                             model: Car,
+                             headers: header_type_1,
+                             options: options)
 
       expect(Car.count).to eq(1)
     end
