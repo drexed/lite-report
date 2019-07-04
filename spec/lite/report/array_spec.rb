@@ -4,6 +4,14 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Array do
 
+  let(:array_type_3) do
+    [
+      ['1', 'Ferrari', '235', '630', 'true', '2014-08-23T20:59:34.000Z'],
+      ['2', 'Lamborghini', '245', '720', 'true', '2014-08-24T20:59:34.000Z'],
+      ['3', 'Bugatti', '256', '1001', 'false', '2014-08-25T20:59:34.000Z']
+    ]
+  end
+
   context 'when exporting to csv without headers' do
     it 'to be an array of arrays' do
       export!(:multi_headerless, multi_array_string)
@@ -16,39 +24,21 @@ RSpec.describe Lite::Report::Array do
 
   context 'when exporting to csv with headers' do
     it 'to be an array of arrays' do
-      sarr = File.read(multi_headers_path)
-      ccsv = described_class.export(multi_array_string,
-                                    headers: header_type_2)
-
-      expect(ccsv).to eq(sarr)
+      export!(:multi_headers, multi_array_string, headers: header_type_2)
     end
 
     it 'to be an array' do
-      sarr = File.read(solo_headers_path)
-      ccsv = described_class.export(solo_array_string,
-                                    headers: header_type_2)
-
-      expect(ccsv).to eq(sarr)
+      export!(:solo_headers, solo_array_string, headers: header_type_2)
     end
   end
 
   context 'when exporting to csv with options' do
     it 'to be an array of arrays' do
-      sarr = File.read(multi_options_path)
-      ccsv = described_class.export(multi_array_string,
-                                    headers: header_type_1,
-                                    options: options)
-
-      expect(ccsv).to eq(sarr)
+      export!(:multi_options, multi_array_string, headers: header_type_1, options: options)
     end
 
     it 'to be an array' do
-      sarr = File.read(solo_options_path)
-      ccsv = described_class.export(solo_array_string,
-                                    headers: header_type_1,
-                                    options: options)
-
-      expect(ccsv).to eq(sarr)
+      export!(:solo_options, solo_array_string, headers: header_type_1, options: options)
     end
   end
 

@@ -2,7 +2,7 @@
 
 module ValidationHelper
 
-  def export!(filename, collection, **opts)
+  def export!(filename, collection, opts = {})
     data = described_class.export(collection, opts)
     file = File.read("spec/support/fixtures/csv/#{filename}.csv")
     expect(data).to eq(file)
