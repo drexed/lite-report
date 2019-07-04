@@ -1,4 +1,6 @@
-require "lite/report/version"
+# frozen_string_literal: true
+
+require 'lite/report/version'
 
 module Lite
   module Report
