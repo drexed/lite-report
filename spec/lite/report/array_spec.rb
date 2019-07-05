@@ -60,70 +60,22 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  context 'when importing csv with typecast data option' do
+  context 'when importing csv with header csv options' do
     it 'to be an array of arrays' do
       import!(
-        template: multi_array_1,
+        template: [header_1].concat(multi_array_2),
         filename: :multi_headerless,
-        data_options: { typecast: true }
+        csv_options: { headers: header_1 }
       )
     end
 
     it 'to be an array' do
       import!(
-        template: solo_array_1,
+        template: [header_1, solo_array_2],
         filename: :solo_headerless,
-        data_options: { typecast: true }
+        csv_options: { headers: header_1 }
       )
     end
   end
-
-  # context 'when importing csv with headers to be an' do
-  #   it 'to be an array of arrays' do
-  #     import!(multi_array_2.unshift(header_1), :multi_headerless, headers: header_1)
-  #   end
-  #
-  #   it 'to be an evaluated array of arrays' do
-  #     carr = described_class.evaluate.import(multi_headerless_path,
-  #                                            headers: header_1)
-  #
-  #     expect(carr).to eq(multi_array_1.dup.unshift(header_1))
-  #   end
-  #
-  #   it 'to be an array' do
-  #     import!([].push(header_1).push(solo_array_2), :solo_headerless, headers: header_1)
-  #   end
-  #
-  #   it 'to be an evaluated array' do
-  #     carr = described_class.evaluate.import(solo_headerless_path,
-  #                                            headers: header_1)
-  #
-  #     expect(carr).to eq([].push(header_1).push(solo_array_1))
-  #   end
-  # end
-  #
-  # context 'when importing csv with options to be an' do
-  #   it 'to be an array of arrays' do
-  #     import!([].push(header_1).concat(multi_array_2), :multi_options, options: options)
-  #   end
-  #
-  #   it 'to be an evaluated array of arrays' do
-  #     carr = described_class.evaluate.import(multi_options_path,
-  #                                            options: options)
-  #
-  #     expect(carr).to eq([].push(header_1).concat(multi_array_1))
-  #   end
-  #
-  #   it 'to be an array' do
-  #     import!([].push(header_1).push(solo_array_2), :solo_options, options: options)
-  #   end
-  #
-  #   it 'to be an evaluated array' do
-  #     carr = described_class.evaluate.import(solo_options_path,
-  #                                            options: options)
-  #
-  #     expect(carr).to eq([].push(header_1).push(solo_array_1))
-  #   end
-  # end
 
 end

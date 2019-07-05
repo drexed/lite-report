@@ -43,6 +43,26 @@ RSpec.describe Lite::Report::Base do
     end
   end
 
+  context 'when importing csv with typecast data option' do
+    it 'to be an array of arrays' do
+      import!(
+        klass: array,
+        template: multi_array_1,
+        filename: :multi_headerless,
+        data_options: { typecast: true }
+      )
+    end
+
+    it 'to be an array' do
+      import!(
+        klass: array,
+        template: solo_array_1,
+        filename: :solo_headerless,
+        data_options: { typecast: true }
+      )
+    end
+  end
+
   context 'when importing csv with encode data options' do
     it 'to be an array of arrays' do
       import!(
