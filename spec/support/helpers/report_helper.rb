@@ -42,9 +42,9 @@ module ReportHelper
 
   let(:multi_array_typecast) do
     [
-      [1, 'Ferrari', 235, 630, true, '2014-08-23T20:59:34.000Z'],
-      [2, 'Lamborghini', 245, 720, true, '2014-08-24T20:59:34.000Z'],
-      [3, 'Bugatti', 256, 1001, false, '2014-08-25T20:59:34.000Z']
+      [1, 'Ferrari', 235, 630, true, '2014-08-23 20:59:34 UTC'],
+      [2, 'Lamborghini', 245, 720, true, '2014-08-24 20:59:34 UTC'],
+      [3, 'Bugatti', 256, 1001, false, '2014-08-25 20:59:34 UTC']
     ]
   end
   let(:multi_array_string) do
@@ -54,7 +54,7 @@ module ReportHelper
   end
 
   let(:solo_array_typecast) do
-    [1, 'Porche', 225, 430, true, '2014-08-22T20:59:34.000Z']
+    [1, 'Porche', 225, 430, true, '2014-08-22 20:59:34 UTC']
   end
   let(:solo_array_string) do
     solo_array_typecast.map(&:to_s)

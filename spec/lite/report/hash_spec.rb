@@ -6,28 +6,28 @@ RSpec.describe Lite::Report::Hash do
   let(:hash_type_1) do
     {
       'Id' => '1', 'Name' => 'Porche', 'Speed' => '225', 'Hp' => '430',
-      'Crash safety rated' => 'true', 'Created at' => '2014-08-22T20:59:34.000Z'
+      'Crash safety rated' => 'true', 'Created at' => '2014-08-22 20:59:34 UTC'
     }
   end
   let(:hash_type_2) do
     {
       'Id' => 1, 'Name' => 'Porche', 'Speed' => 225, 'Hp' => 430,
-      'Crash safety rated' => true, 'Created at' => '2014-08-22T20:59:34.000Z'
+      'Crash safety rated' => true, 'Created at' => '2014-08-22 20:59:34 UTC'
     }
   end
   let(:solo_array_string) do
     [
       {
         'Id' => '1', 'Name' => 'Ferrari', 'Speed' => '235', 'Hp' => '630',
-        'Crash safety rated' => 'true', 'Created at' => '2014-08-23T20:59:34.000Z'
+        'Crash safety rated' => 'true', 'Created at' => '2014-08-23 20:59:34 UTC'
       },
       {
         'Id' => '2', 'Name' => 'Lamborghini', 'Speed' => '245', 'Hp' => '720',
-        'Crash safety rated' => 'true', 'Created at' => '2014-08-24T20:59:34.000Z'
+        'Crash safety rated' => 'true', 'Created at' => '2014-08-24 20:59:34 UTC'
       },
       {
         'Id' => '3', 'Name' => 'Bugatti', 'Speed' => '256', 'Hp' => '1001',
-        'Crash safety rated' => 'false', 'Created at' => '2014-08-25T20:59:34.000Z'
+        'Crash safety rated' => 'false', 'Created at' => '2014-08-25 20:59:34 UTC'
       }
     ]
   end
@@ -35,15 +35,15 @@ RSpec.describe Lite::Report::Hash do
     [
       {
         'Id' => 1, 'Name' => 'Ferrari', 'Speed' => 235, 'Hp' => 630,
-        'Crash safety rated' => true, 'Created at' => '2014-08-23T20:59:34.000Z'
+        'Crash safety rated' => true, 'Created at' => '2014-08-23 20:59:34 UTC'
       },
       {
         'Id' => 2, 'Name' => 'Lamborghini', 'Speed' => 245, 'Hp' => 720,
-        'Crash safety rated' => true, 'Created at' => '2014-08-24T20:59:34.000Z'
+        'Crash safety rated' => true, 'Created at' => '2014-08-24 20:59:34 UTC'
       },
       {
         'Id' => 3, 'Name' => 'Bugatti', 'Speed' => 256, 'Hp' => 1001,
-        'Crash safety rated' => false, 'Created at' => '2014-08-25T20:59:34.000Z'
+        'Crash safety rated' => false, 'Created at' => '2014-08-25 20:59:34 UTC'
       }
     ]
   end

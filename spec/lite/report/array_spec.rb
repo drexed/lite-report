@@ -4,14 +4,6 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Array do
 
-  let(:array_type_3) do
-    [
-      ['1', 'Ferrari', '235', '630', 'true', '2014-08-23T20:59:34.000Z'],
-      ['2', 'Lamborghini', '245', '720', 'true', '2014-08-24T20:59:34.000Z'],
-      ['3', 'Bugatti', '256', '1001', 'false', '2014-08-25T20:59:34.000Z']
-    ]
-  end
-
   context 'when exporting to csv without headers' do
     it 'to be an array of arrays' do
       export!(:multi_headerless, multi_array_string)
@@ -44,24 +36,20 @@ RSpec.describe Lite::Report::Array do
 
   context 'when importing csv without headers to be an' do
     it 'to be an array of arrays' do
-      carr = described_class.import(multi_headerless_path)
-
-      expect(carr).to eq(multi_array_string)
+      import!(multi_array_string, :multi_headerless)
     end
 
-    it 'evaluated array of arrays' do
+    it 'to be an evaluated array of arrays' do
       carr = described_class.evaluate.import(multi_headerless_path)
 
       expect(carr).to eq(multi_array_typecast)
     end
 
     it 'to be an array' do
-      carr = described_class.import(solo_headerless_path)
-
-      expect(carr).to eq(solo_array_string)
+      import!(solo_array_string, :solo_headerless)
     end
 
-    it 'evaluated array' do
+    it 'to be an evaluated array' do
       carr = described_class.evaluate.import(solo_headerless_path)
 
       expect(carr).to eq(solo_array_typecast)
@@ -70,13 +58,10 @@ RSpec.describe Lite::Report::Array do
 
   context 'when importing csv with headers to be an' do
     it 'to be an array of arrays' do
-      carr = described_class.import(multi_headerless_path,
-                                    headers: header_type_1)
-
-      expect(carr).to eq(multi_array_string.dup.unshift(header_type_1))
+      import!(multi_array_string.unshift(header_type_1), :multi_headerless, headers: header_type_1)
     end
 
-    it 'evaluated array of arrays' do
+    it 'to be an evaluated array of arrays' do
       carr = described_class.evaluate.import(multi_headerless_path,
                                              headers: header_type_1)
 
@@ -84,13 +69,10 @@ RSpec.describe Lite::Report::Array do
     end
 
     it 'to be an array' do
-      carr = described_class.import(solo_headerless_path,
-                                    headers: header_type_1)
-
-      expect(carr).to eq([].push(header_type_1).push(solo_array_string))
+      import!([].push(header_type_1).push(solo_array_string), :solo_headerless, headers: header_type_1)
     end
 
-    it 'evaluated array' do
+    it 'to be an evaluated array' do
       carr = described_class.evaluate.import(solo_headerless_path,
                                              headers: header_type_1)
 
@@ -100,13 +82,10 @@ RSpec.describe Lite::Report::Array do
 
   context 'when importing csv with options to be an' do
     it 'to be an array of arrays' do
-      carr = described_class.import(multi_options_path,
-                                    options: options)
-
-      expect(carr).to eq([].push(header_type_1).concat(multi_array_string))
+      import!([].push(header_type_1).concat(multi_array_string), :multi_options, options: options)
     end
 
-    it 'evaluated array of arrays' do
+    it 'to be an evaluated array of arrays' do
       carr = described_class.evaluate.import(multi_options_path,
                                              options: options)
 
@@ -114,13 +93,10 @@ RSpec.describe Lite::Report::Array do
     end
 
     it 'to be an array' do
-      carr = described_class.import(solo_options_path,
-                                    options: options)
-
-      expect(carr).to eq([].push(header_type_1).push(solo_array_string))
+      import!([].push(header_type_1).push(solo_array_string), :solo_options, options: options)
     end
 
-    it 'evaluated array' do
+    it 'to be an evaluated array' do
       carr = described_class.evaluate.import(solo_options_path,
                                              options: options)
 

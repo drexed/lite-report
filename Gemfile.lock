@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     lite-report (0.1.0)
+      safe_ruby
 
 GEM
   remote: https://rubygems.org/
@@ -35,6 +36,8 @@ GEM
     arel (9.0.0)
     ast (2.4.0)
     builder (3.2.3)
+    childprocess (1.0.1)
+      rake (< 13.0)
     colorize (0.8.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
@@ -112,6 +115,8 @@ GEM
     ruby-progressbar (1.10.1)
     ruby_parser (3.13.1)
       sexp_processor (~> 4.9)
+    safe_ruby (1.0.4)
+      childprocess (>= 0.3.9)
     sexp_processor (4.12.1)
     sqlite3 (1.4.1)
     thor (0.20.3)

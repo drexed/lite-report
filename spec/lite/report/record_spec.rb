@@ -4,23 +4,23 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Record do
   let(:hash_type_1) do
-    { name: 'Porche', speed: '225', hp: '430', crash_safety_rated: 'true', created_at: '2014-08-22T20:59:34.000Z' }
+    { name: 'Porche', speed: '225', hp: '430', crash_safety_rated: 'true', created_at: '2014-08-22 20:59:34 UTC' }
   end
   let(:hash_type_2) do
     [
-      { name: 'Ferrari', speed: '235', hp: '630', crash_safety_rated: 'true', created_at: '2014-08-23T20:59:34.000Z' },
-      { name: 'Lamborghini', speed: '245', hp: '720', crash_safety_rated: 'true', created_at: '2014-08-24T20:59:34.000Z' },
-      { name: 'Bugatti', speed: '256', hp: '1001', crash_safety_rated: 'false', created_at: '2014-08-25T20:59:34.000Z' }
+      { name: 'Ferrari', speed: '235', hp: '630', crash_safety_rated: 'true', created_at: '2014-08-23 20:59:34 UTC' },
+      { name: 'Lamborghini', speed: '245', hp: '720', crash_safety_rated: 'true', created_at: '2014-08-24 20:59:34 UTC' },
+      { name: 'Bugatti', speed: '256', hp: '1001', crash_safety_rated: 'false', created_at: '2014-08-25 20:59:34 UTC' }
     ]
   end
   let(:hash_type_3) do
-    { id: 1, name: 'Porche', speed: '225', hp: '430', crash_safety_rated: 'true', created_at: '2014-08-22T20:59:34.000Z' }
+    { id: 1, name: 'Porche', speed: '225', hp: '430', crash_safety_rated: 'true', created_at: '2014-08-22 20:59:34 UTC' }
   end
   let(:hash_type_4) do
     [
-      { id: 1, name: 'Ferrari', speed: '235', hp: '630', crash_safety_rated: 'true', created_at: '2014-08-23T20:59:34.000Z' },
-      { id: 2, name: 'Lamborghini', speed: '245', hp: '720', crash_safety_rated: 'true', created_at: '2014-08-24T20:59:34.000Z' },
-      { id: 3, name: 'Bugatti', speed: '256', hp: '1001', crash_safety_rated: 'false', created_at: '2014-08-25T20:59:34.000Z' }
+      { id: 1, name: 'Ferrari', speed: '235', hp: '630', crash_safety_rated: 'true', created_at: '2014-08-23 20:59:34 UTC' },
+      { id: 2, name: 'Lamborghini', speed: '245', hp: '720', crash_safety_rated: 'true', created_at: '2014-08-24 20:59:34 UTC' },
+      { id: 3, name: 'Bugatti', speed: '256', hp: '1001', crash_safety_rated: 'false', created_at: '2014-08-25 20:59:34 UTC' }
     ]
   end
 
