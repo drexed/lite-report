@@ -3,7 +3,13 @@
 require 'csv'
 require 'safe_ruby'
 
-%w[version configuration base array hash record].each do |file_name|
+require "lite/report/version"
+
+%w[encoders filters headers processors transporters typecasters].each do |file_name|
+  require "lite/report/helpers/#{file_name}"
+end
+
+%w[configuration base array hash record].each do |file_name|
   require "lite/report/#{file_name}"
 end
 

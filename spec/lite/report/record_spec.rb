@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Report::Record do
-  let(:hash_type_1) do
+  let(:hash_type_2) do
     { name: 'Porche', speed: '225', hp: '430', crash_safety_rated: 'true', created_at: '2014-08-22 20:59:34 UTC' }
   end
-  let(:hash_type_2) do
+  let(:hash_type_1) do
     [
       { name: 'Ferrari', speed: '235', hp: '630', crash_safety_rated: 'true', created_at: '2014-08-23 20:59:34 UTC' },
       { name: 'Lamborghini', speed: '245', hp: '720', crash_safety_rated: 'true', created_at: '2014-08-24 20:59:34 UTC' },
@@ -26,7 +26,7 @@ RSpec.describe Lite::Report::Record do
 
   context 'when exporting stream' do
     it 'returns true for query class' do
-      Car.create!(hash_type_1)
+      Car.create!(hash_type_2)
 
       ccsv = described_class.export(Car.all, stream: true)
 
@@ -36,7 +36,7 @@ RSpec.describe Lite::Report::Record do
 
   context 'when exporting csv all data' do
     it 'to be an array of records from a Class dump' do
-      hash_type_2.each { |v| Car.create!(v) }
+      hash_type_1.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_all_path)
       ccsv = described_class.export(Car)
@@ -45,7 +45,7 @@ RSpec.describe Lite::Report::Record do
     end
 
     it 'to be an array of records from a ActiveRelation dump' do
-      hash_type_2.each { |v| Car.create!(v) }
+      hash_type_1.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_dump_path)
       ccsv = described_class.export(Car.where(speed: 235..245))
@@ -56,7 +56,7 @@ RSpec.describe Lite::Report::Record do
 
   context 'when exporting csv all data' do
     it 'to be an array of records' do
-      hash_type_2.each { |v| Car.create!(v) }
+      hash_type_1.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_all_path)
       ccsv = described_class.export(Car.all)
@@ -65,7 +65,7 @@ RSpec.describe Lite::Report::Record do
     end
 
     it 'record' do
-      Car.create!(hash_type_1)
+      Car.create!(hash_type_2)
 
       sarr = File.read(solo_all_path)
       ccsv = described_class.export(Car.first)
@@ -76,7 +76,7 @@ RSpec.describe Lite::Report::Record do
 
   context 'when exporting csv only values' do
     it 'to be an array of records' do
-      hash_type_2.each { |v| Car.create!(v) }
+      hash_type_1.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_only_path)
       ccsv = described_class.export(Car.all,
@@ -86,7 +86,7 @@ RSpec.describe Lite::Report::Record do
     end
 
     it 'record' do
-      Car.create!(hash_type_1)
+      Car.create!(hash_type_2)
 
       sarr = File.read(solo_only_path)
       ccsv = described_class.export(Car.first,
@@ -98,7 +98,7 @@ RSpec.describe Lite::Report::Record do
 
   context 'when exporting csv except values' do
     it 'to be an array of records' do
-      hash_type_2.each { |v| Car.create!(v) }
+      hash_type_1.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_except_path)
       ccsv = described_class.export(Car.all,
@@ -108,7 +108,7 @@ RSpec.describe Lite::Report::Record do
     end
 
     it 'record' do
-      Car.create!(hash_type_1)
+      Car.create!(hash_type_2)
 
       sarr = File.read(solo_except_path)
       ccsv = described_class.export(Car.first,
@@ -120,7 +120,7 @@ RSpec.describe Lite::Report::Record do
 
   context 'when exporting csv with headers' do
     it 'to be an array of records' do
-      hash_type_2.each { |v| Car.create!(v) }
+      hash_type_1.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_headers_path)
       ccsv = described_class.export(Car.all,
@@ -130,7 +130,7 @@ RSpec.describe Lite::Report::Record do
     end
 
     it 'record' do
-      Car.create!(hash_type_1)
+      Car.create!(hash_type_2)
 
       sarr = File.read(solo_headers_path)
       ccsv = described_class.export(Car.first,
@@ -142,7 +142,7 @@ RSpec.describe Lite::Report::Record do
 
   context 'when exporting csv with options' do
     it 'to be an array of records' do
-      hash_type_2.each { |v| Car.create!(v) }
+      hash_type_1.each { |v| Car.create!(v) }
 
       sarr = File.read(multi_options_path)
       ccsv = described_class.export(Car.all,
@@ -152,7 +152,7 @@ RSpec.describe Lite::Report::Record do
     end
 
     it 'record' do
-      Car.create!(hash_type_1)
+      Car.create!(hash_type_2)
 
       sarr = File.read(solo_options_path)
       ccsv = described_class.export(Car.first,

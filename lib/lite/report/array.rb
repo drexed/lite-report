@@ -12,18 +12,11 @@ class Lite::Report::Array < Lite::Report::Base
 
     @data = CSV.foreach(@data, @csv_options)
                .with_object(accumelator) do |row, array|
-                 row = encode!(row) if encode?
-                 row = typecast!(row) if typecast?
+                 row = process_import_row!(row)
 
                  array.push(row)
                end
 
-    normalize_data_dimensions!
-  end
-
-  private
-
-  def normalize_data_dimensions!
     return @data unless @data.size < 2
 
     @data.flatten

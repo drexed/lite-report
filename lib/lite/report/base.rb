@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class Lite::Report::Base
+  include Lite::Report::Helpers::Encoders
+  include Lite::Report::Helpers::Filters
+  include Lite::Report::Helpers::Headers
+  include Lite::Report::Helpers::Processors
+  include Lite::Report::Helpers::Transporters
+  include Lite::Report::Helpers::Typecasters
 
   def initialize(data, data_options: {}, csv_options: {})
     @data = data
@@ -38,90 +44,15 @@ class Lite::Report::Base
     @data = build_array_structure_for(@data)
   end
 
-  def encode?(delete: false)
-    return @data_options.delete(:encode) if delete
-
-    @data_options[:encode]
+  def humanize!(header)
+    header.to_s.tr('_', ' ').capitalize
   end
 
-  def encode!(row)
-    row.map do |cell|
-      next if cell.nil?
-
-      cell.tr('"', '').encode!(*@data_options[:encode])
-    end
-  end
-
-  def generate_export!
-    CSV.generate(@csv_options) do |csv|
-      @data.each { |row| csv << row }
-    end
-  end
-
-  def headers?(delete: false)
-    return @csv_options.delete(:headers) if delete
-
-    @csv_options[:headers]
-  end
-
-  def stream?(delete: false)
-    return @csv_options.delete(:stream) if delete
-
-    @csv_options[:stream]
-  end
-
-  def stream_export!
-    Enumerator.new do |csv|
-      csv << CSV.generate_line(headers?(delete: true)) if write_headers?(delete: true)
-
-      @data.each { |row| csv << CSV.generate_line(row, @csv_options) }
-    end
-  end
-
-  def stream_or_generate_export!
-    return stream_export! if stream?(delete: true)
-
-    generate_export!
-  end
-
-  def typecast?(delete: false)
-    return @data_options.delete(:typecast) if delete
-
-    @data_options[:typecast]
-  end
-
-  def typecast!(row)
-    return row if row.empty?
-
-    typecast_nested_values!(row)
-  end
-
-  def typecast_array_values!(row)
-    row.map { |cell| typecast_value!(cell) }
-  end
-
-  def typecast_hash_values!(row)
-    row.each { |column, cell| row[column] = typecast_value!(cell) }
-  end
-
-  def typecast_nested_values!(row)
+  def values!(row)
     case row.class.name
-    when 'Array' then typecast_array_values!(row)
-    when 'Hash' then typecast_hash_values!(row)
-    else typecast_value!(row)
+    when 'Hash' then row.values
+    else row
     end
-  end
-
-  def typecast_value!(cell)
-    SafeRuby.eval(cell.to_s, timeout: 1)
-  rescue Exception
-    cell
-  end
-
-  def write_headers?(delete: false)
-    return @csv_options.delete(:write_headers) if delete
-
-    @csv_options[:write_headers]
   end
 
 end
