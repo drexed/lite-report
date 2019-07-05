@@ -7,18 +7,17 @@ class Lite::Report::Array < Lite::Report::Base
     stream_or_generate_export!
   end
 
-  private
+  def import
+    @data = CSV.foreach(@data, @csv_options).with_object([]) do |row, array|
+      # row = force_encode_utf8!(row) if force_encode_utf8?
+      row = typecast!(row) if typecast?
 
-  def generate_export!
-    CSV.generate(@csv_options) do |csv|
-      @data.each { |row| csv << row }
+      array.push(row)
     end
-  end
 
-  def stream_export!
-    Enumerator.new do |csv|
-      @data.each { |row| csv << CSV.generate_line(row, @csv_options) }
-    end
+    return @data unless @data.size < 2
+
+    @data.flatten
   end
 
 end

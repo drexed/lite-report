@@ -7,10 +7,13 @@ require 'generator_spec'
 spec_path = Pathname.new(File.expand_path('../spec', File.dirname(__FILE__)))
 
 Lite::Report.configure do |config|
-  config.csv_force_encoding = true
-  config.csv_options = { external_encoding: 'ISO-8859-1', internal_encoding: 'UTF-8' }
-  config.import_adapter = 'sqlite3_adapter'
-  config.import_options = { validate: false, on_duplicate_key_ignore: true }
+  config.csv_options = {}
+  config.data_options = {}
+  config.import_options = {
+    adatapter: 'sqlite3_adapter',
+    validate: false,
+    on_duplicate_key_ignore: true
+  }
 end
 
 %w[config helpers models].each do |dir|

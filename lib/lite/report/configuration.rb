@@ -5,13 +5,12 @@ module Lite
 
     class Configuration
 
-      attr_accessor :csv_force_encoding, :csv_options, :import_adapter, :import_options
+      attr_accessor :csv_options, :data_options, :import_options
 
       def initialize
-        @csv_force_encoding = true
-        @csv_options = { external_encoding: 'ISO-8859-1', internal_encoding: 'UTF-8' }
-        @import_adapter = nil
-        @import_options = { validate: false, on_duplicate_key_ignore: true }
+        @csv_options = {}
+        @data_options = {}
+        @import_adapter = {}
       end
 
     end

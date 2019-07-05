@@ -20,7 +20,7 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  context 'when exporting to csv with header option' do
+  context 'when exporting to csv with header csv option' do
     it 'to be an array of arrays' do
       export!(
         filename: :multi_headers,
@@ -44,7 +44,7 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  context 'when exporting to csv with col_sep option' do
+  context 'when exporting to csv with col_sep csv option' do
     it 'to be an array of arrays' do
       export!(
         filename: :multi_options,
@@ -70,28 +70,40 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  # context 'when importing csv without headers to be an' do
-  #   it 'to be an array of arrays' do
-  #     import!(multi_array_2, :multi_headerless)
-  #   end
-  #
-  #   it 'to be an evaluated array of arrays' do
-  #     carr = described_class.evaluate.import(multi_headerless_path)
-  #
-  #     expect(carr).to eq(multi_array_1)
-  #   end
-  #
-  #   it 'to be an array' do
-  #     import!(solo_array_2, :solo_headerless)
-  #   end
-  #
-  #   it 'to be an evaluated array' do
-  #     carr = described_class.evaluate.import(solo_headerless_path)
-  #
-  #     expect(carr).to eq(solo_array_1)
-  #   end
-  # end
-  #
+  context 'when importing csv without options' do
+    it 'to be an array of arrays' do
+      import!(
+        template: multi_array_2,
+        filename: :multi_headerless
+      )
+    end
+
+    it 'to be an array' do
+      import!(
+        template: solo_array_2,
+        filename: :solo_headerless
+      )
+    end
+  end
+
+  context 'when importing csv with typecast data option' do
+    it 'to be an array of arrays' do
+      import!(
+        template: multi_array_1,
+        filename: :multi_headerless,
+        data_options: { typecast: true }
+      )
+    end
+
+    it 'to be an array' do
+      import!(
+        template: solo_array_1,
+        filename: :solo_headerless,
+        data_options: { typecast: true }
+      )
+    end
+  end
+
   # context 'when importing csv with headers to be an' do
   #   it 'to be an array of arrays' do
   #     import!(multi_array_2.unshift(header_1), :multi_headerless, headers: header_1)
