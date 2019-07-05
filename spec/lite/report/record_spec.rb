@@ -34,7 +34,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv all data' do
+  context 'when exporting csv all data' do
     it 'to be an array of records from a Class dump' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -54,7 +54,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv all data' do
+  context 'when exporting csv all data' do
     it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -74,7 +74,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv only values' do
+  context 'when exporting csv only values' do
     it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -96,7 +96,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv except values' do
+  context 'when exporting csv except values' do
     it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -118,7 +118,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv with headers' do
+  context 'when exporting csv with headers' do
     it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 
@@ -140,7 +140,7 @@ RSpec.describe Lite::Report::Record do
     end
   end
 
-  context 'when exporting to csv with options' do
+  context 'when exporting csv with options' do
     it 'to be an array of records' do
       hash_type_2.each { |v| Car.create!(v) }
 

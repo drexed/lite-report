@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Array do
 
-  context 'when exporting to csv without options' do
+  context 'when exporting csv without options' do
     it 'to be an array of arrays' do
       export!(
         filename: :multi_headerless,
@@ -20,7 +20,7 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  context 'when exporting to csv with header csv option' do
+  context 'when exporting csv with header csv option' do
     it 'to be an array of arrays' do
       export!(
         filename: :multi_headers,
@@ -39,32 +39,6 @@ RSpec.describe Lite::Report::Array do
         csv_options: {
           write_headers: true,
           headers: header_2
-        }
-      )
-    end
-  end
-
-  context 'when exporting to csv with col_sep csv option' do
-    it 'to be an array of arrays' do
-      export!(
-        filename: :multi_options,
-        data: multi_array_2,
-        csv_options: {
-          write_headers: true,
-          headers: header_1,
-          col_sep: ';'
-        }
-      )
-    end
-
-    it 'to be an array' do
-      export!(
-        filename: :solo_options,
-        data: solo_array_2,
-        csv_options: {
-          write_headers: true,
-          headers: header_1,
-          col_sep: ';'
         }
       )
     end

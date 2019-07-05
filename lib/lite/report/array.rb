@@ -9,7 +9,7 @@ class Lite::Report::Array < Lite::Report::Base
 
   def import
     @data = CSV.foreach(@data, @csv_options).with_object([]) do |row, array|
-      # row = force_encode_utf8!(row) if force_encode_utf8?
+      row = encode!(row) if encode?
       row = typecast!(row) if typecast?
 
       array.push(row)

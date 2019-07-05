@@ -38,6 +38,20 @@ class Lite::Report::Base
     @data = build_array_structure_for(@data)
   end
 
+  def encode?(delete: false)
+    return @data_options.delete(:encode) if delete
+
+    @data_options[:encode]
+  end
+
+  def encode!(row)
+    row.map do |cell|
+      next if cell.nil?
+
+      cell.tr('"', '').encode!(*@data_options[:encode])
+    end
+  end
+
   def generate_export!
     CSV.generate(@csv_options) do |csv|
       @data.each { |row| csv << row }
@@ -101,7 +115,7 @@ class Lite::Report::Base
   def typecast_value!(cell)
     SafeRuby.eval(cell.to_s, timeout: 1)
   rescue Exception
-    cell.to_s
+    cell
   end
 
   def write_headers?(delete: false)

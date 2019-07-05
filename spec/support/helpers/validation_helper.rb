@@ -2,9 +2,9 @@
 
 module ValidationHelper
 
-  def export!(filename:, data:, data_options: {}, csv_options: {})
+  def export!(klass: nil, filename:, data:, data_options: {}, csv_options: {})
     template = File.read("spec/support/fixtures/csv/#{filename}.csv")
-    results = described_class.export(
+    results = (klass || described_class).export(
       data,
       data_options: data_options,
       csv_options: csv_options
@@ -13,8 +13,8 @@ module ValidationHelper
     expect(results).to eq(template)
   end
 
-  def import!(template:, filename:, data_options: {}, csv_options: {})
-    results = described_class.import(
+  def import!(klass: nil, template:, filename:, data_options: {}, csv_options: {})
+    results = (klass || described_class).import(
       "spec/support/fixtures/csv/#{filename}.csv",
       data_options: data_options,
       csv_options: csv_options
