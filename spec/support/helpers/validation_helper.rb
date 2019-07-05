@@ -2,15 +2,25 @@
 
 module ValidationHelper
 
-  def export!(filename, collection, opts = {})
-    data = described_class.export(collection, opts)
-    file = File.read("spec/support/fixtures/csv/#{filename}.csv")
-    expect(data).to eq(file)
+  def export!(filename:, data:, data_options: {}, csv_options: {})
+    template = File.read("spec/support/fixtures/csv/#{filename}.csv")
+    results = described_class.export(
+      data,
+      data_options: data_options,
+      csv_options: csv_options
+    )
+
+    expect(results).to eq(template)
   end
 
-  def import!(actual, filename, **opts)
-    data = described_class.import("spec/support/fixtures/csv/#{filename}.csv", opts)
-    expect(data).to eq(actual)
+  def import!(template:, filename:, data_options: {}, csv_options: {})
+    results = described_class.import(
+      "spec/support/fixtures/csv/#{filename}.csv",
+      data_options: data_options,
+      csv_options: csv_options
+    )
+
+    expect(results).to eq(template)
   end
 
 end

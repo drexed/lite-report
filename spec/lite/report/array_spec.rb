@@ -4,104 +4,140 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Array do
 
-  context 'when exporting to csv without headers' do
+  context 'when exporting to csv without options' do
     it 'to be an array of arrays' do
-      export!(:multi_headerless, multi_array_string)
+      export!(
+        filename: :multi_headerless,
+        data: multi_array_2
+      )
     end
 
     it 'to be an array' do
-      export!(:solo_headerless, solo_array_string)
+      export!(
+        filename: :solo_headerless,
+        data: solo_array_2
+      )
     end
   end
 
-  context 'when exporting to csv with headers' do
+  context 'when exporting to csv with header option' do
     it 'to be an array of arrays' do
-      export!(:multi_headers, multi_array_string, headers: header_type_2)
+      export!(
+        filename: :multi_headers,
+        data: multi_array_2,
+        csv_options: {
+          write_headers: true,
+          headers: header_2
+        }
+      )
     end
 
     it 'to be an array' do
-      export!(:solo_headers, solo_array_string, headers: header_type_2)
+      export!(
+        filename: :solo_headers,
+        data: solo_array_2,
+        csv_options: {
+          write_headers: true,
+          headers: header_2
+        }
+      )
     end
   end
 
-  context 'when exporting to csv with options' do
+  context 'when exporting to csv with col_sep option' do
     it 'to be an array of arrays' do
-      export!(:multi_options, multi_array_string, headers: header_type_1, options: options)
+      export!(
+        filename: :multi_options,
+        data: multi_array_2,
+        csv_options: {
+          write_headers: true,
+          headers: header_1,
+          col_sep: ';'
+        }
+      )
     end
 
     it 'to be an array' do
-      export!(:solo_options, solo_array_string, headers: header_type_1, options: options)
+      export!(
+        filename: :solo_options,
+        data: solo_array_2,
+        csv_options: {
+          write_headers: true,
+          headers: header_1,
+          col_sep: ';'
+        }
+      )
     end
   end
 
-  context 'when importing csv without headers to be an' do
-    it 'to be an array of arrays' do
-      import!(multi_array_string, :multi_headerless)
-    end
-
-    it 'to be an evaluated array of arrays' do
-      carr = described_class.evaluate.import(multi_headerless_path)
-
-      expect(carr).to eq(multi_array_typecast)
-    end
-
-    it 'to be an array' do
-      import!(solo_array_string, :solo_headerless)
-    end
-
-    it 'to be an evaluated array' do
-      carr = described_class.evaluate.import(solo_headerless_path)
-
-      expect(carr).to eq(solo_array_typecast)
-    end
-  end
-
-  context 'when importing csv with headers to be an' do
-    it 'to be an array of arrays' do
-      import!(multi_array_string.unshift(header_type_1), :multi_headerless, headers: header_type_1)
-    end
-
-    it 'to be an evaluated array of arrays' do
-      carr = described_class.evaluate.import(multi_headerless_path,
-                                             headers: header_type_1)
-
-      expect(carr).to eq(multi_array_typecast.dup.unshift(header_type_1))
-    end
-
-    it 'to be an array' do
-      import!([].push(header_type_1).push(solo_array_string), :solo_headerless, headers: header_type_1)
-    end
-
-    it 'to be an evaluated array' do
-      carr = described_class.evaluate.import(solo_headerless_path,
-                                             headers: header_type_1)
-
-      expect(carr).to eq([].push(header_type_1).push(solo_array_typecast))
-    end
-  end
-
-  context 'when importing csv with options to be an' do
-    it 'to be an array of arrays' do
-      import!([].push(header_type_1).concat(multi_array_string), :multi_options, options: options)
-    end
-
-    it 'to be an evaluated array of arrays' do
-      carr = described_class.evaluate.import(multi_options_path,
-                                             options: options)
-
-      expect(carr).to eq([].push(header_type_1).concat(multi_array_typecast))
-    end
-
-    it 'to be an array' do
-      import!([].push(header_type_1).push(solo_array_string), :solo_options, options: options)
-    end
-
-    it 'to be an evaluated array' do
-      carr = described_class.evaluate.import(solo_options_path,
-                                             options: options)
-
-      expect(carr).to eq([].push(header_type_1).push(solo_array_typecast))
-    end
-  end
+  # context 'when importing csv without headers to be an' do
+  #   it 'to be an array of arrays' do
+  #     import!(multi_array_2, :multi_headerless)
+  #   end
+  #
+  #   it 'to be an evaluated array of arrays' do
+  #     carr = described_class.evaluate.import(multi_headerless_path)
+  #
+  #     expect(carr).to eq(multi_array_1)
+  #   end
+  #
+  #   it 'to be an array' do
+  #     import!(solo_array_2, :solo_headerless)
+  #   end
+  #
+  #   it 'to be an evaluated array' do
+  #     carr = described_class.evaluate.import(solo_headerless_path)
+  #
+  #     expect(carr).to eq(solo_array_1)
+  #   end
+  # end
+  #
+  # context 'when importing csv with headers to be an' do
+  #   it 'to be an array of arrays' do
+  #     import!(multi_array_2.unshift(header_1), :multi_headerless, headers: header_1)
+  #   end
+  #
+  #   it 'to be an evaluated array of arrays' do
+  #     carr = described_class.evaluate.import(multi_headerless_path,
+  #                                            headers: header_1)
+  #
+  #     expect(carr).to eq(multi_array_1.dup.unshift(header_1))
+  #   end
+  #
+  #   it 'to be an array' do
+  #     import!([].push(header_1).push(solo_array_2), :solo_headerless, headers: header_1)
+  #   end
+  #
+  #   it 'to be an evaluated array' do
+  #     carr = described_class.evaluate.import(solo_headerless_path,
+  #                                            headers: header_1)
+  #
+  #     expect(carr).to eq([].push(header_1).push(solo_array_1))
+  #   end
+  # end
+  #
+  # context 'when importing csv with options to be an' do
+  #   it 'to be an array of arrays' do
+  #     import!([].push(header_1).concat(multi_array_2), :multi_options, options: options)
+  #   end
+  #
+  #   it 'to be an evaluated array of arrays' do
+  #     carr = described_class.evaluate.import(multi_options_path,
+  #                                            options: options)
+  #
+  #     expect(carr).to eq([].push(header_1).concat(multi_array_1))
+  #   end
+  #
+  #   it 'to be an array' do
+  #     import!([].push(header_1).push(solo_array_2), :solo_options, options: options)
+  #   end
+  #
+  #   it 'to be an evaluated array' do
+  #     carr = described_class.evaluate.import(solo_options_path,
+  #                                            options: options)
+  #
+  #     expect(carr).to eq([].push(header_1).push(solo_array_1))
+  #   end
+  # end
 
 end

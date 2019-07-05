@@ -4,26 +4,31 @@ module ReportHelper
 
   extend RSpec::SharedContext
 
-  # TODO:  remove this
-  let(:multi_headerless_options_path) { 'spec/support/fixtures/csv/multi_headerless_options.csv' }
-  let(:multi_headerless_path) { 'spec/support/fixtures/csv/multi_headerless.csv' }
-  let(:multi_headers_path) { 'spec/support/fixtures/csv/multi_headers.csv' }
-  let(:multi_options_path) { 'spec/support/fixtures/csv/multi_options.csv' }
-  let(:multi_except_path) { 'spec/support/fixtures/csv/multi_except.csv' }
-  let(:multi_only_path) { 'spec/support/fixtures/csv/multi_only.csv' }
-  let(:multi_dump_path) { 'spec/support/fixtures/csv/multi_dump.csv' }
-  let(:multi_all_path) { 'spec/support/fixtures/csv/multi_all.csv' }
+  let(:header_1) do
+    ['Id', 'Name', 'Speed', 'Hp', 'Crash safety rated', 'Created at']
+  end
+  let(:header_2) do
+    ['No.', 'Model', 'Speed', 'Horse Power', 'Crash Safety Rated', 'Driven On']
+  end
 
-  let(:solo_headerless_options_path) { 'spec/support/fixtures/csv/solo_headerless_options.csv' }
-  let(:solo_headerless_path) { 'spec/support/fixtures/csv/solo_headerless.csv' }
-  let(:solo_headers_path) { 'spec/support/fixtures/csv/solo_headers.csv' }
-  let(:solo_options_path) { 'spec/support/fixtures/csv/solo_options.csv' }
-  let(:solo_except_path) { 'spec/support/fixtures/csv/solo_except.csv' }
-  let(:solo_only_path) { 'spec/support/fixtures/csv/solo_only.csv' }
-  let(:solo_all_path) { 'spec/support/fixtures/csv/solo_all.csv' }
+  let(:multi_array_1) do
+    [
+      [1, 'Ferrari', 235, 630, true, '2014-08-23 20:59:34 UTC'],
+      [2, 'Lamborghini', 245, 720, true, '2014-08-24 20:59:34 UTC'],
+      [3, 'Bugatti', 256, 1001, false, '2014-08-25 20:59:34 UTC']
+    ]
+  end
+  let(:multi_array_2) do
+    multi_array_1.map do |array|
+      array.map(&:to_s)
+    end
+  end
 
-  let(:options) do
-    { col_sep: ';' }
+  let(:solo_array_1) do
+    [1, 'Porche', 225, 430, true, '2014-08-22 20:59:34 UTC']
+  end
+  let(:solo_array_2) do
+    solo_array_1.map(&:to_s)
   end
 
   let(:only_except_1) do
@@ -31,33 +36,6 @@ module ReportHelper
   end
   let(:only_except_2) do
     %w[Id Name]
-  end
-
-  let(:header_type_1) do
-    ['Id', 'Name', 'Speed', 'Hp', 'Crash safety rated', 'Created at']
-  end
-  let(:header_type_2) do
-    ['No.', 'Model', 'Speed', 'Horse Power', 'Crash Safety Rated', 'Driven On']
-  end
-
-  let(:multi_array_typecast) do
-    [
-      [1, 'Ferrari', 235, 630, true, '2014-08-23 20:59:34 UTC'],
-      [2, 'Lamborghini', 245, 720, true, '2014-08-24 20:59:34 UTC'],
-      [3, 'Bugatti', 256, 1001, false, '2014-08-25 20:59:34 UTC']
-    ]
-  end
-  let(:multi_array_string) do
-    multi_array_typecast.map do |array|
-      array.map(&:to_s)
-    end
-  end
-
-  let(:solo_array_typecast) do
-    [1, 'Porche', 225, 430, true, '2014-08-22 20:59:34 UTC']
-  end
-  let(:solo_array_string) do
-    solo_array_typecast.map(&:to_s)
   end
 
 end

@@ -7,7 +7,7 @@ RSpec.describe Lite::Report::Base do
 
   context 'when streaming export' do
     it 'to be an Enumarator object' do
-      result = klass.export(multi_array_typecast, stream: true)
+      result = klass.export(multi_array_1, stream: true)
 
       expect(result).to eq(Enumerator)
     end

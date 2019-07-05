@@ -124,7 +124,7 @@ RSpec.describe Lite::Report::Record do
 
       sarr = File.read(multi_headers_path)
       ccsv = described_class.export(Car.all,
-                                    headers: header_type_2)
+                                    headers: header_2)
 
       expect(ccsv).to eq(sarr)
     end
@@ -134,7 +134,7 @@ RSpec.describe Lite::Report::Record do
 
       sarr = File.read(solo_headers_path)
       ccsv = described_class.export(Car.first,
-                                    headers: header_type_2)
+                                    headers: header_2)
 
       expect(ccsv).to eq(sarr)
     end
@@ -182,7 +182,7 @@ RSpec.describe Lite::Report::Record do
     it '3 cars' do
       described_class.import(multi_headerless_path,
                              model: Car,
-                             headers: header_type_1)
+                             headers: header_1)
 
       expect(Car.count).to eq(3)
     end
@@ -190,7 +190,7 @@ RSpec.describe Lite::Report::Record do
     it '1 car' do
       described_class.import(solo_headerless_path,
                              model: Car,
-                             headers: header_type_1)
+                             headers: header_1)
 
       expect(Car.count).to eq(1)
     end
@@ -200,7 +200,7 @@ RSpec.describe Lite::Report::Record do
     it '3 cars' do
       described_class.import(multi_headerless_path,
                              model: Car,
-                             headers: header_type_1,
+                             headers: header_1,
                              only: :name)
 
       expect(Car.where.not(name: nil).count).to eq(3)
@@ -209,7 +209,7 @@ RSpec.describe Lite::Report::Record do
     it '1 car' do
       described_class.import(solo_headerless_path,
                              model: Car,
-                             headers: header_type_1,
+                             headers: header_1,
                              only: :name)
 
       expect(Car.where.not(name: nil).count).to eq(1)
@@ -220,7 +220,7 @@ RSpec.describe Lite::Report::Record do
     it '3 cars' do
       described_class.import(multi_headerless_path,
                              model: Car,
-                             headers: header_type_1,
+                             headers: header_1,
                              except: :name)
 
       expect(Car.where(name: nil).count).to eq(3)
@@ -229,7 +229,7 @@ RSpec.describe Lite::Report::Record do
     it '1 car' do
       described_class.import(solo_headerless_path,
                              model: Car,
-                             headers: header_type_1,
+                             headers: header_1,
                              except: :name)
 
       expect(Car.where(name: nil).count).to eq(1)
@@ -240,7 +240,7 @@ RSpec.describe Lite::Report::Record do
     it '3 cars' do
       described_class.import(multi_headerless_options_path,
                              model: Car,
-                             headers: header_type_1,
+                             headers: header_1,
                              options: options)
 
       expect(Car.count).to eq(3)
@@ -249,7 +249,7 @@ RSpec.describe Lite::Report::Record do
     it '1 car' do
       described_class.import(solo_headerless_options_path,
                              model: Car,
-                             headers: header_type_1,
+                             headers: header_1,
                              options: options)
 
       expect(Car.count).to eq(1)

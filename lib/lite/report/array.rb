@@ -3,35 +3,21 @@
 class Lite::Report::Array < Lite::Report::Base
 
   def export
-    @data = munge_first(@data)
-    @data = @data.unshift(@opts[:headers]) unless @opts[:headers].nil?
-
-    @opts[:stream] ? export_stream : export_csv
-  end
-
-  def import
-    array = merge(@opts[:headers])
-
-    CSV.foreach(@data, @opts[:options]) do |row|
-      row = encode_to_utf8(row) if csv_force_encoding?
-      array.push(row)
-    end
-
-    array = array.flatten if array.size < 2
-    metatransform(array)
+    build_first_csv_structure!
+    stream_or_generate_export!
   end
 
   private
 
-  def export_csv
-    CSV.generate(@opts[:options]) do |csv|
+  def generate_export!
+    CSV.generate(@csv_options) do |csv|
       @data.each { |row| csv << row }
     end
   end
 
-  def export_stream
+  def stream_export!
     Enumerator.new do |csv|
-      @data.each { |row| csv << CSV.generate_line(row) }
+      @data.each { |row| csv << CSV.generate_line(row, @csv_options) }
     end
   end
 
