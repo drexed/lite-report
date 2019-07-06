@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Hash do
 
-  context 'when exporting csv without options' do
+  context 'when exporting a hash csv without options' do
     it 'to be an array of hashes' do
       export!(
         filename: :multi_headerless,
@@ -16,48 +16,6 @@ RSpec.describe Lite::Report::Hash do
       export!(
         filename: :solo_headerless,
         data: solo_hash_2
-      )
-    end
-  end
-
-  context 'when exporting csv with write_header csv option' do
-    it 'to be an array of hashes' do
-      export!(
-        filename: :multi_all,
-        data: multi_hash_2,
-        csv_options: { write_headers: true }
-      )
-    end
-
-    it 'hash' do
-      export!(
-        filename: :solo_all,
-        data: solo_hash_2,
-        csv_options: { write_headers: true }
-      )
-    end
-  end
-
-  context 'when exporting csv with headers' do
-    it 'to be an array of hashes' do
-      export!(
-        filename: :multi_headers,
-        data: multi_hash_2,
-        csv_options: {
-          write_headers: true,
-          headers: header_2
-        }
-      )
-    end
-
-    it 'hash' do
-      export!(
-        filename: :solo_headers,
-        data: solo_hash_2,
-        csv_options: {
-          write_headers: true,
-          headers: header_2
-        }
       )
     end
   end

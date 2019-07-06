@@ -4,6 +4,10 @@ module ReportHelper
 
   extend RSpec::SharedContext
 
+  let(:array) { Lite::Report::Array }
+  let(:hash) { Lite::Report::Hash }
+  let(:report) { Lite::Report::Report }
+
   let(:header_1) do
     ['Id', 'Name', 'Speed', 'Hp', 'Crash safety rated', 'Created at']
   end
