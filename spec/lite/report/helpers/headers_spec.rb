@@ -70,7 +70,7 @@ RSpec.describe Lite::Report::Helpers::Headers do
     end
   end
 
-  context 'when exporting a hash csv with headers' do
+  context 'when exporting a hash csv with header csv option' do
     it 'to be an array of hashes' do
       export!(
         klass: hash,

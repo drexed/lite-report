@@ -17,12 +17,10 @@ class Lite::Report::Hash < Lite::Report::Base
   def assign_headers_option!
     return unless write_headers?
 
-    @csv_options[:headers] ||= begin
-      hash = @data.first unless @data.is_a?(Hash)
-      hash = filter_hash!(hash)
+    hash = @csv_options[:headers] || (@data.is_a?(Hash) ? @data : @data.first)
+    hash = filter_hash!(hash)
 
-      hash.keys.map { |header| humanize!(header) }
-    end
+    @csv_options[:headers] = hash.keys.map { |header| humanize!(header) }
   end
 
 end

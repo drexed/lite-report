@@ -12,7 +12,7 @@ RSpec.describe Lite::Report::Hash do
       )
     end
 
-    it 'hash' do
+    it 'to be a hash' do
       export!(
         filename: :solo_headerless,
         data: solo_hash_2
@@ -20,42 +20,6 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  # context 'when exporting csv only values' do
-  #   it 'to be an array of hashes' do
-  #     sarr = File.read(multi_only_path)
-  #     ccsv = described_class.export(solo_array_2,
-  #                                   only: only_except_2)
-  #
-  #     expect(ccsv).to eq(sarr)
-  #   end
-  #
-  #   it 'hash' do
-  #     sarr = File.read(solo_only_path)
-  #     ccsv = described_class.export(hash_type_2,
-  #                                   only: only_except_1)
-  #
-  #     expect(ccsv).to eq(sarr)
-  #   end
-  # end
-
-  # context 'when exporting csv except values' do
-  #   it 'to be an array of hashes' do
-  #     sarr = File.read(multi_except_path)
-  #     ccsv = described_class.export(solo_array_2,
-  #                                   except: only_except_2)
-  #
-  #     expect(ccsv).to eq(sarr)
-  #   end
-  #
-  #   it 'hash' do
-  #     sarr = File.read(solo_except_path)
-  #     ccsv = described_class.export(hash_type_2,
-  #                                   except: only_except_1)
-  #
-  #     expect(ccsv).to eq(sarr)
-  #   end
-  # end
-  #
   # context 'when exporting csv with options' do
   #   it 'to be an array of hashes' do
   #     sarr = File.read(multi_options_path)
@@ -65,7 +29,7 @@ RSpec.describe Lite::Report::Hash do
   #     expect(ccsv).to eq(sarr)
   #   end
   #
-  #   it 'hash' do
+  #   it 'to be a hash' do
   #     sarr = File.read(solo_options_path)
   #     ccsv = described_class.export(hash_type_2,
   #                                   options: options)

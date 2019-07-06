@@ -20,14 +20,14 @@ module Lite
         def filter!(row)
           case row.class.name
           when 'Array' then filter_array!(row)
-          when 'Hash' then filter_hash(row)
+          when 'Hash' then filter_hash!(row)
           end
         end
 
         def filter_array!(row)
-          if @data_options[:only]
+          if only?
             row.keep_if.with_index { |_, i| @data_options[:only].include?(i) }
-          elsif @data_options[:except]
+          elsif except?
             row.delete_if.with_index { |_, i| @data_options[:except].include?(i) }
           else
             row
@@ -35,9 +35,9 @@ module Lite
         end
 
         def filter_hash!(row)
-          if @data_options[:only]
+          if only?
             row.keep_if { |key, _| @data_options[:only].include?(key) }
-          elsif @data_options[:except]
+          elsif except?
             row.delete_if { |key, _| @data_options[:except].include?(key) }
           else
             row
