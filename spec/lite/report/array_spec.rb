@@ -4,8 +4,8 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Array do
 
-  context 'when exporting an array csv without options' do
-    it 'to be an array of arrays' do
+  context 'when exporting an array csv' do
+    it 'to be without options' do
       export!(
         filename: :headerless,
         data: array
@@ -13,8 +13,8 @@ RSpec.describe Lite::Report::Array do
     end
   end
 
-  context 'when importing an array csv without options' do
-    it 'to be an array of arrays' do
+  context 'when importing an array csv' do
+    it 'to be without options' do
       import!(
         template: array,
         filename: :headerless

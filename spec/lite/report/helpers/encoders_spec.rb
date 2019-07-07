@@ -4,8 +4,8 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Helpers::Encoders do
 
-  context 'when importing an array csv with encode data options' do
-    it 'to be an array of arrays' do
+  context 'when importing an array csv' do
+    it 'to be with encode data options' do
       import!(
         klass: Lite::Report::Array,
         template: array,
