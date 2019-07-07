@@ -6,6 +6,7 @@ class Lite::Report::Base
   include Lite::Report::Helpers::Filters
   include Lite::Report::Helpers::Headers
   include Lite::Report::Helpers::Processors
+  include Lite::Report::Helpers::Records
   include Lite::Report::Helpers::Transporters
 
   def initialize(data, data_options: {}, csv_options: {})

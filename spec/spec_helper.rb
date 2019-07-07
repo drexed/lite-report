@@ -10,7 +10,6 @@ Lite::Report.configure do |config|
   config.csv_options = {}
   config.data_options = {}
   config.import_options = {
-    adatapter: 'sqlite3_adapter',
     validate: false,
     on_duplicate_key_ignore: true
   }

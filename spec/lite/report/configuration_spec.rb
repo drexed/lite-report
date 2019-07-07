@@ -5,30 +5,23 @@ require 'spec_helper'
 RSpec.describe Lite::Report::Configuration do
   after(:all) do
     Lite::Report.configure do |config|
-      config.csv_force_encoding = true
-      config.csv_options = { external_encoding: 'ISO-8859-1', internal_encoding: 'UTF-8' }
-      config.import_adapter = nil
-      config.import_options = { validate: false, on_duplicate_key_ignore: true }
+      config.csv_options = {}
+      config.data_options = {}
+      config.import_options = {}
     end
   end
 
   describe '#configure' do
-    it 'to be "foo" for csv_force_encoding' do
-      Lite::Report.configuration.csv_force_encoding = 'foo'
-
-      expect(Lite::Report.configuration.csv_force_encoding).to eq('foo')
-    end
-
     it 'to be "foo" for csv_options' do
       Lite::Report.configuration.csv_options = 'foo'
 
       expect(Lite::Report.configuration.csv_options).to eq('foo')
     end
 
-    it 'to be "foo" for import_adapter' do
-      Lite::Report.configuration.import_adapter = 'foo'
+    it 'to be "foo" for data_options' do
+      Lite::Report.configuration.data_options = 'foo'
 
-      expect(Lite::Report.configuration.import_adapter).to eq('foo')
+      expect(Lite::Report.configuration.data_options).to eq('foo')
     end
 
     it 'to be "foo" for import_options' do

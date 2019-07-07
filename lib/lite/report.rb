@@ -3,7 +3,7 @@
 require 'csv'
 require "lite/report/version"
 
-%w[converters encoders filters headers processors transporters].each do |file_name|
+%w[converters encoders filters headers processors records transporters].each do |file_name|
   require "lite/report/helpers/#{file_name}"
 end
 

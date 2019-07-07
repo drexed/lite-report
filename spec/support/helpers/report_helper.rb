@@ -60,4 +60,10 @@ module ReportHelper
     end
   end
 
+  let(:record) do
+    array.map do |row|
+      Hash[header_1.map { |key| key.downcase.tr(' ', '_') }.zip(row)]
+    end
+  end
+
 end
