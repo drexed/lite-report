@@ -9,13 +9,11 @@ class Lite::Report::Array < Lite::Report::Base
   end
 
   def import
-    accumelator = build_array_structure_for(@csv_options.delete(:headers))
-
     @data = CSV.foreach(@data, @csv_options)
-               .with_object(accumelator) do |row, array|
+               .with_object([]) do |row, array|
+                 row = convert_to_array!(row)
                  row = process_import_row!(row)
-
-                 array.push(row)
+                 array << row
                end
 
     return @data unless @data.size < 2
@@ -26,7 +24,7 @@ class Lite::Report::Array < Lite::Report::Base
   private
 
   def assign_headers_option!
-    return unless headers?
+    return unless write_headers?
 
     @csv_options[:headers] = filter_array!(@csv_options[:headers])
   end

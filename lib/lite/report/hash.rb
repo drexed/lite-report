@@ -10,10 +10,8 @@ class Lite::Report::Hash < Lite::Report::Base
 
   def import
     @data = CSV.foreach(@data, @csv_options)
-               .with_object([]) do |data, array|
-                 row = process_import_row!(row)
-
-                 array.push(row)
+               .with_object([]) do |row, array|
+                 array << process_import_row!(row)
                end
 
     return @data unless @data.size == 1

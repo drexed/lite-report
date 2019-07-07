@@ -13,6 +13,12 @@ module Lite
           @csv_options[:headers]
         end
 
+        def return_headers?(delete: false)
+          return @csv_options.delete(:return_headers) if delete
+
+          @csv_options[:return_headers]
+        end
+
         def write_headers?(delete: false)
           return @csv_options.delete(:write_headers) if delete
 

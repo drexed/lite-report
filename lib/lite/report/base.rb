@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Lite::Report::Base
+  include Lite::Report::Helpers::Converters
   include Lite::Report::Helpers::Encoders
   include Lite::Report::Helpers::Filters
   include Lite::Report::Helpers::Headers

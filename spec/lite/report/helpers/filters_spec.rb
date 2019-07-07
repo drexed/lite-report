@@ -60,6 +60,34 @@ RSpec.describe Lite::Report::Helpers::Filters do
     end
   end
 
+  context 'when importing an array csv without options' do
+    it 'to be an array of arrays' do
+      import!(
+        klass: array,
+        template: multi_array_2,
+        filename: :multi_headerless,
+        data_options: { only: [0, 1] },
+        csv_options: {
+          return_headers: true,
+          headers: header_1
+        }
+      )
+    end
+
+    it 'to be an array' do
+      import!(
+        klass: array,
+        template: solo_array_2,
+        filename: :solo_headerless,
+        data_options: { only: [0, 1] },
+        csv_options: {
+          return_headers: true,
+          headers: header_1
+        }
+      )
+    end
+  end
+
   context 'when exporting a hash csv with only option' do
     it 'to be an array of hashes' do
       export!(
