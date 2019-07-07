@@ -41,12 +41,12 @@ module ReportHelper
 
   let(:hash) do
     array.map do |row|
-      Hash[header_1.zip(row)]
+      Hash[(0..(row.size - 1)).zip(row)]
     end
   end
-  let(:hash_index) do
+  let(:hash_headers) do
     array.map do |row|
-      Hash[(0..(row.size - 1)).zip(row)]
+      Hash[header_1.zip(row)]
     end
   end
 

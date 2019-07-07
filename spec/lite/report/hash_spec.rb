@@ -8,7 +8,7 @@ RSpec.describe Lite::Report::Hash do
     it 'to be without options' do
       export!(
         filename: :headerless,
-        data: hash_index
+        data: hash
       )
     end
   end
@@ -16,7 +16,7 @@ RSpec.describe Lite::Report::Hash do
   context 'when importing a hash csv' do
     it 'to be without options' do
       import!(
-        template: hash_index,
+        template: hash,
         filename: :headerless
       )
     end
