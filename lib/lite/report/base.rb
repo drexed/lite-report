@@ -7,7 +7,6 @@ class Lite::Report::Base
   include Lite::Report::Helpers::Headers
   include Lite::Report::Helpers::Processors
   include Lite::Report::Helpers::Transporters
-  include Lite::Report::Helpers::Typecasters
 
   def initialize(data, data_options: {}, csv_options: {})
     @data = data

@@ -8,11 +8,17 @@ module Lite
         private
 
         def convert_to_array!(row)
-          row.fields
+          case row.class.name
+          when 'CSV::Row' then row.fields
+          else row
+          end
         end
 
         def convert_to_hash!(row)
-          row.to_hash
+          case row.class.name
+          when 'CSV::Row' then row.to_hash
+          else row
+          end
         end
 
       end

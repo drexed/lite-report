@@ -16,7 +16,6 @@ module Lite
         def process_import_row!(row)
           row = filter!(row) if filter?
           row = encode!(row) if encode?
-          row = typecast!(row) if typecast?
           row
         end
 
