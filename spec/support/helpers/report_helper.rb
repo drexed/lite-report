@@ -40,20 +40,14 @@ module ReportHelper
   end
 
   let(:hash) do
-    [
-      {
-        'Id' => '1', 'Name' => 'Ferrari', 'Speed' => '235', 'Hp' => '630',
-        'Crash safety rated' => 'true', 'Created at' => '2014-08-23 20:59:34 UTC'
-      },
-      {
-        'Id' => '2', 'Name' => 'Lamborghini', 'Speed' => '245', 'Hp' => '720',
-        'Crash safety rated' => 'true', 'Created at' => '2014-08-24 20:59:34 UTC'
-      },
-      {
-        'Id' => '3', 'Name' => 'Bugatti', 'Speed' => '256', 'Hp' => '1001',
-        'Crash safety rated' => 'false', 'Created at' => '2014-08-25 20:59:34 UTC'
-      }
-    ]
+    array.map do |row|
+      Hash[header_1.zip(row)]
+    end
+  end
+  let(:hash_index) do
+    array.map do |row|
+      Hash[(0..(row.size - 1)).zip(row)]
+    end
   end
 
 end

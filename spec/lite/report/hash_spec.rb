@@ -4,34 +4,20 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Hash do
 
-  context 'when exporting a hash csv without options' do
-    it 'to be an array of hashes' do
+  context 'when exporting a hash csv' do
+    it 'to be without options' do
       export!(
-        filename: :multi_headerless,
-        data: multi_hash_2
-      )
-    end
-
-    it 'to be a hash' do
-      export!(
-        filename: :solo_headerless,
-        data: solo_hash_2
+        filename: :headerless,
+        data: hash_index
       )
     end
   end
 
-  context 'when importing a hash csv without options' do
-    it 'to be an array of arrays' do
+  context 'when importing a hash csv' do
+    it 'to be without options' do
       import!(
-        template: multi_array_2,
-        filename: :multi_headerless
-      )
-    end
-
-    it 'to be an array' do
-      import!(
-        template: solo_array_2,
-        filename: :solo_headerless
+        template: hash_index,
+        filename: :headerless
       )
     end
   end

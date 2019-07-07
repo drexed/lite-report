@@ -9,6 +9,7 @@ module Lite
 
         def process_export_row!(row)
           row = filter!(row) if filter?
+          row = values!(row)
           row = encode!(row) if encode?
           row
         end

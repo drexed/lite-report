@@ -16,6 +16,7 @@ module Lite
 
         def convert_to_hash!(row)
           case row.class.name
+          when 'Array' then ::Hash[(0..(row.size - 1)).zip(row)]
           when 'CSV::Row' then row.to_hash
           else row
           end

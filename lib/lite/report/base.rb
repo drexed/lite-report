@@ -50,6 +50,7 @@ class Lite::Report::Base
 
   def values!(row)
     case row.class.name
+    when 'CSV::Row' then row.fields
     when 'Hash' then row.values
     else row
     end
