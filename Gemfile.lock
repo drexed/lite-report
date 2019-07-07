@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     lite-report (0.1.0)
+      deep_pluck
 
 GEM
   remote: https://rubygems.org/
@@ -39,6 +40,9 @@ GEM
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     database_cleaner (1.7.0)
+    deep_pluck (1.1.1)
+      activerecord (>= 3)
+      pluck_all (>= 1.2.3)
     diff-lcs (1.3)
     erubi (1.8.0)
     fasterer (0.5.1)
@@ -61,6 +65,8 @@ GEM
     parallel (1.17.0)
     parser (2.6.3.0)
       ast (~> 2.4.0)
+    pluck_all (2.0.4)
+      activesupport (>= 3.0.0)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)

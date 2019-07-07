@@ -113,4 +113,36 @@ RSpec.describe Lite::Report::Helpers::Filters do
     end
   end
 
+  context 'when exporting an record csv' do
+    before(:each) do
+      hash_records.each { |hash| Car.create!(hash) }
+    end
+
+    it 'to be with only data option' do
+      export!(
+        klass: Lite::Report::Record,
+        filename: :only,
+        data: active_record,
+        data_options: { only: only_columns },
+        csv_options: {
+          write_headers: true,
+          headers: only
+        }
+      )
+    end
+
+    it 'to be with except data option' do
+      export!(
+        klass: Lite::Report::Record,
+        filename: :except,
+        data: active_relation,
+        data_options: { except: except_columns },
+        csv_options: {
+          write_headers: true,
+          headers: except
+        }
+      )
+    end
+  end
+
 end

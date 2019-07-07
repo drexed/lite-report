@@ -20,6 +20,12 @@ module ReportHelper
   let(:except) do
     header_1.reject.with_index { |_, i| only_except.include?(i) }
   end
+  let(:only_columns) do
+    only.map { |cell| cell.downcase.tr(' ', '_') }
+  end
+  let(:except_columns) do
+    except.map { |cell| cell.downcase.tr(' ', '_') }
+  end
 
   let(:array) do
     [
@@ -49,6 +55,11 @@ module ReportHelper
       Hash[header_1.zip(row)]
     end
   end
+  let(:hash_records) do
+    array.map do |row|
+      Hash[header_1.map { |key| key.downcase.tr(' ', '_') }.zip(row)]
+    end
+  end
   let(:hash_only) do
     hash_headers.map do |row|
       row.select { |key, val| only.include?(key) }
@@ -60,10 +71,14 @@ module ReportHelper
     end
   end
 
-  let(:record) do
-    array.map do |row|
-      Hash[header_1.map { |key| key.downcase.tr(' ', '_') }.zip(row)]
-    end
+  let(:active_record) do
+    Car
+  end
+  let(:active_relation) do
+    Car.where(speed: 0..999)
+  end
+  let(:ransack) do
+    Car.ransack(speed_gt: 0)
   end
 
 end

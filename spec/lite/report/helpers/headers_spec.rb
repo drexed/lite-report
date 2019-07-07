@@ -87,4 +87,31 @@ RSpec.describe Lite::Report::Helpers::Headers do
     end
   end
 
+  context 'when exporting a record csv' do
+    before(:each) do
+      hash_records.each { |hash| Car.create!(hash) }
+    end
+
+    it 'to be with write_headers csv option' do
+      export!(
+        klass: Lite::Report::Record,
+        filename: :records,
+        data: active_record,
+        csv_options: { write_headers: true }
+      )
+    end
+
+    it 'to be with headers csv options' do
+      export!(
+        klass: Lite::Report::Record,
+        filename: :headers,
+        data: active_relation,
+        csv_options: {
+          write_headers: true,
+          headers: header_2
+        }
+      )
+    end
+  end
+
 end

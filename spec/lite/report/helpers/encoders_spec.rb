@@ -30,4 +30,17 @@ RSpec.describe Lite::Report::Helpers::Encoders do
     end
   end
 
+  context 'when importing an record csv' do
+    it 'to be with encode data options' do
+      import!(
+        klass: Lite::Report::Record,
+        template: hash,
+        filename: :headerless,
+        data_options: {
+          encode: ['UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '']
+        }
+      )
+    end
+  end
+
 end

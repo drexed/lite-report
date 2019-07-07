@@ -1,0 +1,4 @@
+id,name,speed,hp,crash_safety_rated,created_at
+1,Ferrari,235,630,true,2014-08-23 20:59:34 UTC
+2,Lamborghini,245,720,true,2014-08-24 20:59:34 UTC
+3,Bugatti,256,1001,false,2014-08-25 20:59:34 UTC

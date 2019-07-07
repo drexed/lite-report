@@ -2,15 +2,14 @@
 
 require 'json'
 require 'active_record'
+require 'deep_pluck'
 
-# TODO: Use ransack
 # TODO: Use activerecord-import
-# TODO: Use deep_pluck
 
 class Lite::Report::Record < Lite::Report::Base
 
   def export
-    # assign_headers_to_csv_options!
+    assign_headers_to_csv_options!
     generate_or_stream_export!
   end
 
@@ -19,17 +18,15 @@ class Lite::Report::Record < Lite::Report::Base
   def assign_headers_to_csv_options!
     return unless write_headers?
 
-    @csv_options[:headers] ||= @data.attributes
+    @csv_options[:headers] ||= class_columns(@data)
   end
 
   def generate_export!
+    columns = class_columns(@data)
     @data = @data.result if ransack_class?(@data)
+    @data = @data.deep_pluck(*columns)
 
-    CSV.generate(@csv_options) do |csv|
-      @data.deep_pluck('*') do |record|
-        csv << process_export_row!(record.attributes)
-      end
-    end
+    super
   end
 
 end
