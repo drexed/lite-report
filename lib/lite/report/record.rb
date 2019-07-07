@@ -3,11 +3,9 @@
 require 'json'
 require 'active_record'
 
-begin
-  require 'activerecord-import'
-rescue Gem::LoadError
-  # Do nothing
-end
+# TODO: Use ransack
+# TODO: Use activerecord-import
+# TODO: Use deep_pluck
 
 class Lite::Report::Record < Lite::Report::Base
 
@@ -25,7 +23,7 @@ class Lite::Report::Record < Lite::Report::Base
   end
 
   def generate_export!
-    # @data = @data.result if ransack_object?(@data)
+    @data = @data.result if ransack_class?(@data)
 
     CSV.generate(@csv_options) do |csv|
       @data.find_each(@data_options[:find_each] || {}) do |record|
@@ -33,18 +31,5 @@ class Lite::Report::Record < Lite::Report::Base
       end
     end
   end
-
-
-  # def export_csv
-  #   @data = @data.result if ransack_object?(@data)
-  #
-  #   CSV.generate(@opts[:options]) do |csv|
-  #     csv << @opts[:headers]
-  #
-  #     @data.find_each(find_each_options) do |row|
-  #       csv << filter_values(row.attributes)
-  #     end
-  #   end
-  # end
 
 end

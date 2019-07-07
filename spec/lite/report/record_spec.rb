@@ -2,16 +2,19 @@
 
 require 'spec_helper'
 
-require 'activerecord-import'
-require 'activerecord-import/base'
-require 'activerecord-import/active_record/adapters/sqlite3_adapter'
+# require 'activerecord-import'
+# require 'activerecord-import/base'
+# require 'activerecord-import/active_record/adapters/sqlite3_adapter'
+require 'ransack'
 
 RSpec.describe Lite::Report::Record do
 
   context 'when exporting a record csv' do
-    it 'to be without options for Class' do
-      record.each { |v| Car.create!(v) }
+    before(:each) do
+      record.each { |hash| Car.create!(hash) }
+    end
 
+    it 'to be without options for ActiveRecord' do
       export!(
         filename: :headerless,
         data: Car
@@ -19,11 +22,16 @@ RSpec.describe Lite::Report::Record do
     end
 
     it 'to be without options for ActiveRelation' do
-      record.each { |v| Car.create!(v) }
-
       export!(
         filename: :headerless,
-        data: Car.where(speed: 0..300)
+        data: Car.where(speed: 0..999)
+      )
+    end
+
+    it 'to be without options for Ransack' do
+      export!(
+        filename: :headerless,
+        data: Car.ransack(speed_gt: 0)
       )
     end
   end
