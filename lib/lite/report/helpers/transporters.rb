@@ -15,6 +15,12 @@ module Lite
           end
         end
 
+        def generate_or_stream_export!
+          return stream_export! if stream?(delete: true)
+
+          generate_export!
+        end
+
         def stream?(delete: false)
           return @csv_options.delete(:stream) if delete
 
@@ -27,16 +33,9 @@ module Lite
 
             @data.each do |row|
               row = process_export_row!(row)
-
               csv << CSV.generate_line(row, @csv_options)
             end
           end
-        end
-
-        def stream_or_generate_export!
-          return stream_export! if stream?(delete: true)
-
-          generate_export!
         end
 
       end

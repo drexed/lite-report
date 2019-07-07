@@ -4,9 +4,9 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Helpers::Transporters do
 
-  context 'when exporting an array csv with stream csv option' do
-    it 'to be an Enumarator object' do
-      result = array.export(multi_array_1, csv_options: { stream: true })
+  context 'when exporting an array csv' do
+    it 'to be with stream csv option' do
+      result = Lite::Report::Array.export(array, csv_options: { stream: true })
 
       expect(result).to be_a(Enumerator)
     end

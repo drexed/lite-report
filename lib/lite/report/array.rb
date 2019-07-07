@@ -3,7 +3,7 @@
 class Lite::Report::Array < Lite::Report::Base
 
   def export
-    stream_or_generate_export!
+    generate_or_stream_export!
   end
 
   def import
