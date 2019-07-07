@@ -7,6 +7,12 @@ module Lite
 
         private
 
+        def header_row?(row)
+          return false unless row.respond_to?(:header_row?)
+
+          row.header_row?
+        end
+
         def headers?(delete: false)
           return @csv_options.delete(:headers) if delete
 

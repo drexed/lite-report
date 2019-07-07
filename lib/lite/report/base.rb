@@ -28,26 +28,6 @@ class Lite::Report::Base
 
   private
 
-  def build_array_structure_for(data)
-    [data].compact
-  end
-
-  def build_csv_structure!
-    return if @data.is_a?(Array)
-
-    @data = build_array_structure_for(@data)
-  end
-
-  def build_first_csv_structure!
-    return if @data.first.is_a?(Array)
-
-    @data = build_array_structure_for(@data)
-  end
-
-  def humanize!(header)
-    header.to_s.tr('_', ' ').capitalize
-  end
-
   def values!(row)
     case row.class.name
     when 'CSV::Row' then row.fields
