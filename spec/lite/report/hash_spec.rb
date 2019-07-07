@@ -20,50 +20,22 @@ RSpec.describe Lite::Report::Hash do
     end
   end
 
-  # context 'when exporting csv with options' do
-  #   it 'to be an array of hashes' do
-  #     sarr = File.read(multi_options_path)
-  #     ccsv = described_class.export(solo_array_2,
-  #                                   options: options)
-  #
-  #     expect(ccsv).to eq(sarr)
-  #   end
-  #
-  #   it 'to be a hash' do
-  #     sarr = File.read(solo_options_path)
-  #     ccsv = described_class.export(hash_type_2,
-  #                                   options: options)
-  #
-  #     expect(ccsv).to eq(sarr)
-  #   end
-  # end
+  context 'when importing a hash csv without options' do
+    it 'to be an array of arrays' do
+      import!(
+        template: multi_array_2,
+        filename: :multi_headerless
+      )
+    end
 
-  # context 'when importing csv without headers returns' do
-  #   it 'an array of hashes' do
-  #     carr = described_class.import(multi_all_path)
-  #
-  #     expect(carr).to eq(solo_array_2)
-  #   end
-  #
-  #   it 'an evaluated array of hashes' do
-  #     carr = described_class.evaluate.import(multi_all_path)
-  #
-  #     expect(carr).to eq(solo_array_1)
-  #   end
-  #
-  #   it 'a hash' do
-  #     carr = described_class.import(solo_all_path)
-  #
-  #     expect(carr).to eq(hash_type_2)
-  #   end
-  #
-  #   it 'an evaluated hash' do
-  #     carr = described_class.evaluate.import(solo_all_path)
-  #
-  #     expect(carr).to eq(hash_type_1)
-  #   end
-  # end
-  #
+    it 'to be an array' do
+      import!(
+        template: solo_array_2,
+        filename: :solo_headerless
+      )
+    end
+  end
+
   # context 'when importing csv with headers returns' do
   #   it 'an array of hashes' do
   #     carr = described_class.import(multi_headerless_path,
