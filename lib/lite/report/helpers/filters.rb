@@ -38,7 +38,7 @@ module Lite
           if only?
             row.keep_if { |key, _| @data_options[:only].include?(key) }
           elsif except?
-            row.delete_if { |key, _| @data_options[:except].include?(key) }
+            row.keep_if { |key, _| @data_options[:except].include?(key) }
           else
             row
           end

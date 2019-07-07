@@ -49,5 +49,15 @@ module ReportHelper
       Hash[header_1.zip(row)]
     end
   end
+  let(:hash_only) do
+    hash_headers.map do |row|
+      row.select { |key, val| only.include?(key) }
+    end
+  end
+  let(:hash_except) do
+    hash_headers.map do |row|
+      row.select { |key, val| except.include?(key) }
+    end
+  end
 
 end

@@ -60,48 +60,57 @@ RSpec.describe Lite::Report::Helpers::Filters do
     end
   end
 
-  # context 'when exporting a hash csv with only option' do
-  #   it 'to be an array of hashes' do
-  #     export!(
-  #       klass: hash,
-  #       filename: :multi_only,
-  #       data: multi_hash_2,
-  #       data_options: { only: only_except_2 },
-  #       csv_options: { write_headers: true }
-  #     )
-  #   end
-  #
-  #   it 'be a hash' do
-  #     export!(
-  #       klass: hash,
-  #       filename: :solo_only,
-  #       data: solo_hash_2,
-  #       data_options: { only: only_except_1 },
-  #       csv_options: { write_headers: true }
-  #     )
-  #   end
-  # end
-  #
-  # context 'when exporting a hash csv with except option' do
-  #   it 'to be an array of hashes' do
-  #     export!(
-  #       klass: hash,
-  #       filename: :multi_except,
-  #       data: multi_hash_2,
-  #       data_options: { except: only_except_2 },
-  #       csv_options: { write_headers: true }
-  #     )
-  #   end
-  #
-  #   it 'be a hash' do
-  #     export!(
-  #       klass: hash,
-  #       filename: :solo_except,
-  #       data: solo_hash_2,
-  #       data_options: { except: only_except_1 },
-  #       csv_options: { write_headers: true }
-  #     )
-  #   end
-  # end
+  context 'when exporting an hash csv' do
+    it 'to be with only data option' do
+      export!(
+        klass: Lite::Report::Hash,
+        filename: :only,
+        data: hash_headers,
+        data_options: { only: only },
+        csv_options: {
+          write_headers: true,
+          headers: only
+        }
+      )
+    end
+
+    it 'to be with except data option' do
+      export!(
+        klass: Lite::Report::Hash,
+        filename: :except,
+        data: hash_headers,
+        data_options: { except: except },
+        csv_options: {
+          write_headers: true,
+          headers: except
+        }
+      )
+    end
+  end
+
+  context 'when importing an hash csv' do
+    it 'to be with only data option' do
+      import!(
+        klass: Lite::Report::Hash,
+        template: hash_only,
+        filename: :all,
+        data_options: { only: only },
+        csv_options: { headers: true }
+      )
+    end
+
+    it 'to be with except data option' do
+      import!(
+        klass: Lite::Report::Hash,
+        template: hash_except,
+        filename: :headerless,
+        data_options: { except: except },
+        csv_options: {
+          return_headers: true,
+          headers: header_1
+        }
+      )
+    end
+  end
 
 end
