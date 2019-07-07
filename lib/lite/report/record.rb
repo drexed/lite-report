@@ -26,7 +26,7 @@ class Lite::Report::Record < Lite::Report::Base
     @data = @data.result if ransack_class?(@data)
 
     CSV.generate(@csv_options) do |csv|
-      @data.find_each(@data_options[:find_each] || {}) do |record|
+      @data.deep_pluck('*') do |record|
         csv << process_export_row!(record.attributes)
       end
     end
