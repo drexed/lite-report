@@ -88,7 +88,7 @@ RSpec.describe Lite::Report::Helpers::Headers do
   end
 
   context 'when exporting a record csv' do
-    before(:each) do
+    before do
       hash_records.each { |hash| Car.create!(hash) }
     end
 

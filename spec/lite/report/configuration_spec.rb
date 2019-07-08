@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Report::Configuration do
-  after(:all) do
+  after do
     Lite::Report.configure do |config|
       config.csv_options = {}
       config.data_options = {}

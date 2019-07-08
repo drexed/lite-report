@@ -18,6 +18,8 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/**/*'
     - '*.gemspec'
+RSpec/ExampleLength:
+  Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/Documentation:

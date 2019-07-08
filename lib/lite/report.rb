@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'csv'
-require "lite/report/version"
+require 'lite/report/version'
 
 %w[converters encoders filters headers processors records transporters].each do |file_name|
   require "lite/report/helpers/#{file_name}"

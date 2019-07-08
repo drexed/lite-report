@@ -114,7 +114,7 @@ RSpec.describe Lite::Report::Helpers::Filters do
   end
 
   context 'when exporting an record csv' do
-    before(:each) do
+    before do
       hash_records.each { |hash| Car.create!(hash) }
     end
 
@@ -148,7 +148,7 @@ RSpec.describe Lite::Report::Helpers::Filters do
   context 'when importing an record csv' do
     it 'to be with only data option' do
       Lite::Report::Record.import(
-        "spec/support/fixtures/csv/headerless.csv",
+        'spec/support/fixtures/csv/headerless.csv',
         data_options: {
           klass: active_record,
           only: only_columns
@@ -162,7 +162,7 @@ RSpec.describe Lite::Report::Helpers::Filters do
 
     it 'to be with except data option' do
       Lite::Report::Record.import(
-        "spec/support/fixtures/csv/headerless.csv",
+        'spec/support/fixtures/csv/headerless.csv',
         data_options: {
           klass: active_record,
           only: except_columns

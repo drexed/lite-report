@@ -62,12 +62,12 @@ module ReportHelper
   end
   let(:hash_only) do
     hash_headers.map do |row|
-      row.select { |key, val| only.include?(key) }
+      row.select { |key, _| only.include?(key) }
     end
   end
   let(:hash_except) do
     hash_headers.map do |row|
-      row.select { |key, val| except.include?(key) }
+      row.select { |key, _| except.include?(key) }
     end
   end
 

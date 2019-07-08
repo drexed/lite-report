@@ -33,7 +33,7 @@ RSpec.describe Lite::Report::Helpers::Encoders do
   context 'when importing an record csv' do
     it 'to be with encode data options' do
       Lite::Report::Record.import(
-        "spec/support/fixtures/csv/headerless.csv",
+        'spec/support/fixtures/csv/headerless.csv',
         data_options: {
           klass: active_record,
           encode: ['UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '']

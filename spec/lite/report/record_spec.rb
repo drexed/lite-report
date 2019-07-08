@@ -6,7 +6,7 @@ require 'ransack'
 RSpec.describe Lite::Report::Record do
 
   context 'when exporting a record csv' do
-    before(:each) do
+    before do
       hash_records.each { |hash| Car.create!(hash) }
     end
 
@@ -34,14 +34,14 @@ RSpec.describe Lite::Report::Record do
 
   context 'when importing a record csv' do
     it 'to be raise an ArgumentError' do
-      expect {
-        described_class.import("spec/support/fixtures/csv/headerless.csv")
-      }.to raise_error(ArgumentError)
+      expect do
+        described_class.import('spec/support/fixtures/csv/headerless.csv')
+      end.to raise_error(ArgumentError)
     end
 
     it 'to be without options' do
       described_class.import(
-        "spec/support/fixtures/csv/headerless.csv",
+        'spec/support/fixtures/csv/headerless.csv',
         data_options: { klass: active_record }
       )
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Lite::Report::Base
+
   include Lite::Report::Helpers::Converters
   include Lite::Report::Helpers::Encoders
   include Lite::Report::Helpers::Filters
@@ -17,6 +18,7 @@ class Lite::Report::Base
   end
 
   class << self
+
     def export(data, csv_options: {}, data_options: {}, import_options: {})
       klass = new(
         data,
@@ -38,6 +40,7 @@ class Lite::Report::Base
 
       klass.import
     end
+
   end
 
   private
