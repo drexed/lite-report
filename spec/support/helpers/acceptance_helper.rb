@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module ValidationHelper
+module AcceptanceHelper
 
   def export!(klass: nil, filename:, data:, data_options: {}, csv_options: {})
     template = File.read("spec/support/fixtures/csv/#{filename}.csv")

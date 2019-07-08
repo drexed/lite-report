@@ -37,6 +37,6 @@ RSpec.configure do |config|
     FileUtils.remove_dir(temp_path) if File.directory?(temp_path)
   end
 
-  config.include ReportHelper
-  config.include ValidationHelper
+  config.include AcceptanceHelper
+  config.include ContextHelper
 end
