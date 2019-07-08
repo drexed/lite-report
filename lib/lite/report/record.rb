@@ -16,12 +16,9 @@ class Lite::Report::Record < Lite::Report::Base
     assign_import_csv_options!
 
     @data = Lite::Report::Hash.import(@data, csv_options: @csv_options, data_options: @data_options)
-                              .each_with_object([]) do |row, array|
-                                row.delete(:id)
-                                array << row
-                              end
+                              .each { |row| row.delete(:id) || row.delete('id') }
 
-    klass.import(@data) # .import(@data, import_options)
+    klass.import(@data, @import_options)
   end
 
   private
@@ -42,11 +39,19 @@ class Lite::Report::Record < Lite::Report::Base
     @csv_options[:headers] ||= class_columns(klass)
   end
 
-  def generate_export!
+  def assign_export_data!
     columns = class_columns(@data)
     @data = @data.result if ransack_class?(@data)
     @data = @data.deep_pluck(*columns)
+  end
 
+  def generate_export!
+    assign_export_data!
+    super
+  end
+
+  def stream_export!
+    assign_export_data!
     super
   end
 

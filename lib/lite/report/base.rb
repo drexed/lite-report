@@ -9,20 +9,33 @@ class Lite::Report::Base
   include Lite::Report::Helpers::Records
   include Lite::Report::Helpers::Transporters
 
-  def initialize(data, data_options: {}, csv_options: {})
+  def initialize(data, csv_options: {}, data_options: {}, import_options: {})
     @data = data
-    @data_options = data_options
-    @csv_options = csv_options
+    @csv_options = Lite::Report.configuration.csv_options.merge(csv_options)
+    @data_options = Lite::Report.configuration.data_options.merge(data_options)
+    @import_options = Lite::Report.configuration.import_options.merge(import_options)
   end
 
   class << self
-    def export(data, data_options: {}, csv_options: {})
-      klass = new(data, data_options: data_options, csv_options: csv_options)
+    def export(data, csv_options: {}, data_options: {}, import_options: {})
+      klass = new(
+        data,
+        csv_options: csv_options,
+        data_options: data_options,
+        import_options: import_options
+      )
+
       klass.export
     end
 
-    def import(data, data_options: {}, csv_options: {})
-      klass = new(data, data_options: data_options, csv_options: csv_options)
+    def import(data, csv_options: {}, data_options: {}, import_options: {})
+      klass = new(
+        data,
+        csv_options: csv_options,
+        data_options: data_options,
+        import_options: import_options
+      )
+
       klass.import
     end
   end
