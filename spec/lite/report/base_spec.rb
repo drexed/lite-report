@@ -4,12 +4,12 @@ require 'spec_helper'
 
 RSpec.describe Lite::Report::Base do
 
-  context 'when exporting an array csv with col_sep csv option' do
-    it 'to be an array of arrays' do
+  context 'when exporting an array csv' do
+    it 'to be with col_sep csv option' do
       export!(
-        klass: array,
-        filename: :multi_options,
-        data: multi_array_2,
+        klass: Lite::Report::Array,
+        filename: :options,
+        data: array,
         csv_options: {
           write_headers: true,
           headers: header_1,
@@ -17,15 +17,16 @@ RSpec.describe Lite::Report::Base do
         }
       )
     end
+  end
 
-    it 'to be an array' do
-      export!(
-        klass: array,
-        filename: :solo_options,
-        data: solo_array_2,
+  context 'when importing an array csv' do
+    it 'to be with col_sep csv option' do
+      import!(
+        klass: Lite::Report::Array,
+        template: array,
+        filename: :options,
         csv_options: {
-          write_headers: true,
-          headers: header_1,
+          headers: true,
           col_sep: ';'
         }
       )

@@ -13,6 +13,10 @@ module Lite
           data.column_names
         end
 
+        def klass
+          @data_options[:klass]
+        end
+
         def ransack_class?(data)
           return false unless defined?(Ransack)
 

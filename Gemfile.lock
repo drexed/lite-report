@@ -1,7 +1,9 @@
 PATH
   remote: .
   specs:
-    lite-report (0.1.0)
+    lite-report (1.0.0)
+      activerecord
+      activerecord-import
       deep_pluck
 
 GEM
@@ -135,8 +137,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
-  activerecord-import
   bundler
   database_cleaner
   fasterer

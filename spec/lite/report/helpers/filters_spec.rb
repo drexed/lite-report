@@ -145,4 +145,34 @@ RSpec.describe Lite::Report::Helpers::Filters do
     end
   end
 
+  context 'when importing an record csv' do
+    it 'to be with only data option' do
+      Lite::Report::Record.import(
+        "spec/support/fixtures/csv/headerless.csv",
+        data_options: {
+          klass: active_record,
+          only: only_columns
+        }
+      )
+
+      results = active_record.last.attributes.values.compact.size
+
+      expect(results).to eq(only_columns.size + 1)
+    end
+
+    it 'to be with except data option' do
+      Lite::Report::Record.import(
+        "spec/support/fixtures/csv/headerless.csv",
+        data_options: {
+          klass: active_record,
+          only: except_columns
+        }
+      )
+
+      results = active_record.last.attributes.values.compact.size
+
+      expect(results).to eq(except_columns.size + 1)
+    end
+  end
+
 end
