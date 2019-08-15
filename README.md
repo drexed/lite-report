@@ -37,7 +37,7 @@ Or install it yourself as:
 ## Configurations
 
 `rails g lite:report:install` will generate the following file:
-`../config/initalizers/lite-report.rb`
+`../config/initalizers/lite_report.rb`
 
 Place your default configs in this file.
 
