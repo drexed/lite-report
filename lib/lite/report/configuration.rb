@@ -10,7 +10,7 @@ module Lite
       def initialize
         @csv_options = {}
         @data_options = {}
-        @import_adapter = {}
+        @import_options = {}
       end
 
     end
