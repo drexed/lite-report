@@ -6,14 +6,7 @@ require 'generator_spec'
 
 spec_path = Pathname.new(File.expand_path('../spec', File.dirname(__FILE__)))
 
-Lite::Report.configure do |config|
-  config.csv_options = {}
-  config.data_options = {}
-  config.import_options = {
-    validate: false,
-    on_duplicate_key_ignore: true
-  }
-end
+Lite::Report.reset_configuration!
 
 %w[config helpers models].each do |dir|
   Dir.each_child(spec_path.join("support/#{dir}")) do |f|

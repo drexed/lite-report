@@ -3,13 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Report::Configuration do
-  after do
-    Lite::Report.configure do |config|
-      config.csv_options = {}
-      config.data_options = {}
-      config.import_options = {}
-    end
-  end
+  after { Lite::Report.reset_configuration! }
 
   describe '#configure' do
     it 'to be "foo" for csv_options' do
@@ -17,17 +11,14 @@ RSpec.describe Lite::Report::Configuration do
 
       expect(Lite::Report.configuration.csv_options).to eq('foo')
     end
+  end
 
-    it 'to be "foo" for data_options' do
-      Lite::Report.configuration.data_options = 'foo'
+  describe '#reset_configuration!' do
+    it 'to be true' do
+      Lite::Report.configuration.csv_options = 'foo'
+      Lite::Report.reset_configuration!
 
-      expect(Lite::Report.configuration.data_options).to eq('foo')
-    end
-
-    it 'to be "foo" for import_options' do
-      Lite::Report.configuration.import_options = 'foo'
-
-      expect(Lite::Report.configuration.import_options).to eq('foo')
+      expect(Lite::Report.configuration.csv_options.is_a?(Hash)).to eq(true)
     end
   end
 
