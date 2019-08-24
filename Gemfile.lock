@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lite-report (1.0.2)
+    lite-report (1.0.3)
       activerecord
       activerecord-import
       deep_pluck
