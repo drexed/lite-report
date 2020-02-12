@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2020-02-11
+### Changed
+- Fix record instance not generating
+
 ## [1.0.3] - 2019-08-24
 ### Changed
 - Fix broken configuration option

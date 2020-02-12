@@ -10,6 +10,13 @@ RSpec.describe Lite::Report::Record do
       hash_records.each { |hash| Car.create!(hash) }
     end
 
+    it 'to be without options for Instance' do
+      export!(
+        filename: :instance,
+        data: instance
+      )
+    end
+
     it 'to be without options for ActiveRecord' do
       export!(
         filename: :headerless,

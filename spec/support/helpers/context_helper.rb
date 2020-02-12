@@ -77,6 +77,9 @@ module ContextHelper
   let(:active_relation) do
     Car.where(speed: 0..999)
   end
+  let(:instance) do
+    Car.first
+  end
   let(:ransack) do
     Car.ransack(speed_gt: 0)
   end

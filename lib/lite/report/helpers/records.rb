@@ -10,7 +10,7 @@ module Lite
         def class_columns(data)
           return data.klass.column_names if ransack_class?(data)
 
-          data.column_names
+          data.try(:column_names) || data.class.column_names
         end
 
         def klass
