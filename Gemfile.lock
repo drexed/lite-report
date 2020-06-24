@@ -70,7 +70,7 @@ GEM
       activesupport (>= 3.0.0)
     polyamorous (2.3.2)
       activerecord (>= 5.2.1)
-    rack (2.2.2)
+    rack (2.2.3)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails-dom-testing (2.0.3)
