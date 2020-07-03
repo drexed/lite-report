@@ -3,6 +3,16 @@
 require 'spec_helper'
 
 RSpec.describe Lite::Report::Helpers::Encoders do
+  let(:encode_options) do
+    [
+      'UTF-8',
+      'binary',
+      invalid: :replace,
+      undef: :replace,
+      replace: '',
+      UNIVERSAL_NEWLINE_DECORATOR: true
+    ]
+  end
 
   context 'when importing an array csv' do
     it 'to be with encode data options' do
@@ -10,9 +20,7 @@ RSpec.describe Lite::Report::Helpers::Encoders do
         klass: Lite::Report::Array,
         template: array,
         filename: :headerless,
-        data_options: {
-          encode: ['UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '']
-        }
+        data_options: { encode: encode_options }
       )
     end
   end
@@ -23,9 +31,7 @@ RSpec.describe Lite::Report::Helpers::Encoders do
         klass: Lite::Report::Hash,
         template: hash,
         filename: :headerless,
-        data_options: {
-          encode: ['UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '']
-        }
+        data_options: { encode: encode_options }
       )
     end
   end
@@ -36,7 +42,7 @@ RSpec.describe Lite::Report::Helpers::Encoders do
         'spec/support/fixtures/csv/headerless.csv',
         data_options: {
           klass: active_record,
-          encode: ['UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '']
+          encode: encode_options
         }
       )
 

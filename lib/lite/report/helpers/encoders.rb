@@ -10,7 +10,14 @@ module Lite
         def encode(cell)
           return cell unless cell.is_a?(String)
 
-          cell.tr('"', '').encode!(*@data_options[:encode])
+          cell = cell.tr('"', '')
+          return cell if @data_options[:encode].empty?
+
+          cell.encode!(
+            @data_options[:encode][0],
+            @data_options[:encode][1],
+            **@data_options[:encode][2]
+          )
         end
 
         def encode?(delete: false)

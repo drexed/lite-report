@@ -8,7 +8,7 @@ module Lite
         private
 
         def generate_export!
-          CSV.generate(@csv_options) do |csv|
+          CSV.generate(**@csv_options) do |csv|
             @data.each do |row|
               csv << process_export_row!(row)
             end
@@ -33,7 +33,7 @@ module Lite
 
             @data.each do |row|
               row = process_export_row!(row)
-              csv << CSV.generate_line(row, @csv_options)
+              csv << CSV.generate_line(row, **@csv_options)
             end
           end
         end

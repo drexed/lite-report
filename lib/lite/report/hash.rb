@@ -8,7 +8,7 @@ class Lite::Report::Hash < Lite::Report::Base
   end
 
   def import
-    CSV.foreach(@data, @csv_options)
+    CSV.foreach(@data, **@csv_options)
        .with_object([]) do |row, array|
          next if header_row?(row)
 
