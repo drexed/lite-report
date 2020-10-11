@@ -2,7 +2,7 @@
 
 module AcceptanceHelper
 
-  def export!(klass: nil, filename:, data:, data_options: {}, csv_options: {})
+  def export!(filename:, data:, klass: nil, data_options: {}, csv_options: {})
     template = File.read("spec/support/fixtures/csv/#{filename}.csv")
     results = (klass || described_class).export(
       data,
@@ -13,7 +13,7 @@ module AcceptanceHelper
     expect(results).to eq(template)
   end
 
-  def import!(klass: nil, template:, filename:, data_options: {}, csv_options: {})
+  def import!(template:, filename:, klass: nil, data_options: {}, csv_options: {})
     results = (klass || described_class).import(
       "spec/support/fixtures/csv/#{filename}.csv",
       data_options: data_options,

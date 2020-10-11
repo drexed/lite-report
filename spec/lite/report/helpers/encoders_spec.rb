@@ -7,10 +7,12 @@ RSpec.describe Lite::Report::Helpers::Encoders do
     [
       'UTF-8',
       'binary',
-      invalid: :replace,
-      undef: :replace,
-      replace: '',
-      UNIVERSAL_NEWLINE_DECORATOR: true
+      {
+        invalid: :replace,
+        undef: :replace,
+        replace: '',
+        UNIVERSAL_NEWLINE_DECORATOR: true
+      }
     ]
   end
 

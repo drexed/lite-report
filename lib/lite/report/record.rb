@@ -18,7 +18,7 @@ class Lite::Report::Record < Lite::Report::Base
     @data = Lite::Report::Hash.import(@data, csv_options: @csv_options, data_options: @data_options)
                               .each { |row| row.delete(:id) || row.delete('id') }
 
-    klass.import(@data, @import_options)
+    klass.import(@data, **@import_options)
   end
 
   private
