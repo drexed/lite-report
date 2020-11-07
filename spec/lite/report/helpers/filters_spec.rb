@@ -41,7 +41,7 @@ RSpec.describe Lite::Report::Helpers::Filters do
         data_options: { only: only_except },
         csv_options: {
           return_headers: true,
-          headers: header_1
+          headers: header1
         }
       )
     end
@@ -54,7 +54,7 @@ RSpec.describe Lite::Report::Helpers::Filters do
         data_options: { except: only_except },
         csv_options: {
           return_headers: true,
-          headers: header_1
+          headers: header1
         }
       )
     end
@@ -107,7 +107,7 @@ RSpec.describe Lite::Report::Helpers::Filters do
         data_options: { except: except },
         csv_options: {
           return_headers: true,
-          headers: header_1
+          headers: header1
         }
       )
     end

@@ -4,10 +4,10 @@ module ContextHelper
 
   extend RSpec::SharedContext
 
-  let(:header_1) do
+  let(:header1) do
     ['Id', 'Name', 'Speed', 'Hp', 'Crash safety rated', 'Created at']
   end
-  let(:header_2) do
+  let(:header2) do
     ['No.', 'Model', 'Speed', 'Horse Power', 'Crash Safety Rated', 'Driven On']
   end
 
@@ -15,10 +15,10 @@ module ContextHelper
     [0, 1]
   end
   let(:only) do
-    header_1.select.with_index { |_, i| only_except.include?(i) }
+    header1.select.with_index { |_, i| only_except.include?(i) }
   end
   let(:except) do
-    header_1.reject.with_index { |_, i| only_except.include?(i) }
+    header1.reject.with_index { |_, i| only_except.include?(i) }
   end
   let(:only_columns) do
     only.map { |cell| cell.downcase.tr(' ', '_') }
@@ -52,12 +52,12 @@ module ContextHelper
   end
   let(:hash_headers) do
     array.map do |row|
-      Hash[header_1.zip(row)]
+      Hash[header1.zip(row)]
     end
   end
   let(:hash_records) do
     array.map do |row|
-      Hash[header_1.map { |key| key.downcase.tr(' ', '_') }.zip(row)]
+      Hash[header1.map { |key| key.downcase.tr(' ', '_') }.zip(row)]
     end
   end
   let(:hash_only) do

@@ -12,7 +12,7 @@ RSpec.describe Lite::Report::Helpers::Headers do
         data: array,
         csv_options: {
           write_headers: true,
-          headers: header_2
+          headers: header2
         }
       )
     end
@@ -31,11 +31,11 @@ RSpec.describe Lite::Report::Helpers::Headers do
     it 'to be with return_headers csv options' do
       import!(
         klass: Lite::Report::Array,
-        template: array.unshift(header_1),
+        template: array.unshift(header1),
         filename: :headerless,
         csv_options: {
           return_headers: true,
-          headers: header_1
+          headers: header1
         }
       )
     end
@@ -58,7 +58,7 @@ RSpec.describe Lite::Report::Helpers::Headers do
         data: hash_headers,
         csv_options: {
           write_headers: true,
-          headers: header_2
+          headers: header2
         }
       )
     end
@@ -81,7 +81,7 @@ RSpec.describe Lite::Report::Helpers::Headers do
         filename: :headerless,
         csv_options: {
           return_headers: true,
-          headers: header_1
+          headers: header1
         }
       )
     end
@@ -108,7 +108,7 @@ RSpec.describe Lite::Report::Helpers::Headers do
         data: active_relation,
         csv_options: {
           write_headers: true,
-          headers: header_2
+          headers: header2
         }
       )
     end

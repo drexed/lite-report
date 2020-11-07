@@ -12,7 +12,7 @@ RSpec.describe Lite::Report::Base do
         data: array,
         csv_options: {
           write_headers: true,
-          headers: header_1,
+          headers: header1,
           col_sep: ';'
         }
       )
