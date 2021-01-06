@@ -7,7 +7,7 @@ require 'lite/report/version'
   require "lite/report/helpers/#{file_name}"
 end
 
-%w[configuration base array hash record].each do |file_name|
+%w[configuration base array hash record exporter].each do |file_name|
   require "lite/report/#{file_name}"
 end
 

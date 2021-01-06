@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-01-06
+### Added
+- Added Exporter helper class
+- Added rubocop-rake linter
+
 ## [1.0.6] - 2020-10-10
 ### Added
 - Added improved Ruby 2.7 support

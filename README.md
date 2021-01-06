@@ -31,6 +31,7 @@ Or install it yourself as:
 * [Array](#array)
 * [Hash](#hash)
 * [Record](#record)
+* [Exporter](#exporter)
 * [Stream](#stream)
 * [Port](#port)
 
@@ -142,6 +143,32 @@ Lite::Report::Record.import(
     except: [:age, :sex]
   }
 )
+```
+
+## Exporter
+
+Use exporters to filter, manipulate, and prepare data before final exportation.
+These are very helpful when working with complex datasets.
+
+```ruby
+class LimitedExporter < Lite::Report::Exporter
+
+  private
+
+  def serialize(record)
+    {
+      'Id' => record.id,
+      'Name' => "#{record.first_name} #{record.last_name}",
+      'Speed' => record.speed.ceil,
+      'Date' => record.to_s(:short)
+    }
+  end
+
+end
+
+raw_data = User.where(age: 20..29)
+limited_data = LimitedExporter.call(raw_data)
+Lite::Report::Hash.export(limited_data)
 ```
 
 ## Stream

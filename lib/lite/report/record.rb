@@ -43,7 +43,7 @@ class Lite::Report::Record < Lite::Report::Base
     columns = class_columns(@data)
     @data = @data.result if ransack_class?(@data)
     @data = @data.deep_pluck(*columns)
-    @data = [@data] unless @data.is_a?(Array)
+    @data = [@data] if !@data.respond_to?(:each) || !@data.is_a?(Array)
   end
 
   def generate_export!
