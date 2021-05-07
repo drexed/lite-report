@@ -47,17 +47,17 @@ module ContextHelper
 
   let(:hash) do
     array.map do |row|
-      Hash[(0..(row.size - 1)).zip(row)]
+      (0..(row.size - 1)).zip(row).to_h
     end
   end
   let(:hash_headers) do
     array.map do |row|
-      Hash[header1.zip(row)]
+      header1.zip(row).to_h
     end
   end
   let(:hash_records) do
     array.map do |row|
-      Hash[header1.map { |key| key.downcase.tr(' ', '_') }.zip(row)]
+      header1.map { |key| key.downcase.tr(' ', '_') }.zip(row).to_h
     end
   end
   let(:hash_only) do

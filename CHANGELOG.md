@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2021-05-07
+### Changed
+- Linter fixes
+
 ## [1.1.0] - 2021-01-06
 ### Added
 - Added Exporter helper class
