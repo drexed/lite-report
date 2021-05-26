@@ -162,6 +162,11 @@ class LimitedExporter < Lite::Report::Exporter
       'Speed' => record.speed.ceil,
       'Date' => record.to_s(:short)
     }
+
+    # - or -
+
+    serializer = RecordSerializer.new(record)
+    serializer.serializable_hash
   end
 
 end
