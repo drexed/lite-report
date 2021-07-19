@@ -135,12 +135,15 @@ Lite::Report::Record.export(
   }
 )
 
-# Convert CSV file to an array of records
+# Convert CSV file to an array of records (import options are from Rails `insert_all`)
 Lite::Report::Record.import(
   'path/to/file.csv',
   data_options: {
     klass: User,
     except: [:age, :sex]
+  },
+  import_options: {
+    unique_by: %w[Name Age]
   }
 )
 ```

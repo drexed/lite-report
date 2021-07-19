@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_record'
-require 'activerecord-import'
 require 'deep_pluck'
 
 class Lite::Report::Record < Lite::Report::Base
@@ -16,9 +15,13 @@ class Lite::Report::Record < Lite::Report::Base
     assign_import_csv_options!
 
     @data = Lite::Report::Hash.import(@data, csv_options: @csv_options, data_options: @data_options)
-                              .each { |row| row.delete(:id) || row.delete('id') }
+                              .each do |row|
+                                row.delete(:id) || row.delete('id')
+                                (row['created_at'] ||= timestamp) if created_at_timestamp?
+                                (row['updated_at'] ||= timestamp) if updated_at_timestamp?
+                              end
 
-    klass.import(@data, **@import_options)
+    klass.insert_all(@data, **@import_options)
   end
 
   private
@@ -54,6 +57,22 @@ class Lite::Report::Record < Lite::Report::Base
   def stream_export!
     assign_export_data!
     super
+  end
+
+  def timestamp
+    @timestamp ||= Time.respond_to?(:current) ? Time.current : Time.now
+  end
+
+  def created_at_timestamp?
+    return @created_at_timestamp if defined?(@created_at_timestamp)
+
+    @created_at_timestamp = klass.new.respond_to?(:created_at)
+  end
+
+  def updated_at_timestamp?
+    return @updated_at_timestamp if defined?(@updated_at_timestamp)
+
+    @updated_at_timestamp = klass.new.respond_to?(:updated_at)
   end
 
 end
