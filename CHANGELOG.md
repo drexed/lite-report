@@ -6,9 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.1.1] - 2021-07-18
+## [1.20.0] - 2021-07-18
 ### Removed
 - Removed `activerecord-import` dependency
+- Removed `deep_pluck` dependency
 
 ## [1.1.1] - 2021-05-07
 ### Changed

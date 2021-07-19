@@ -38,7 +38,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = %w[lib]
 
   spec.add_runtime_dependency 'activerecord'
-  spec.add_runtime_dependency 'deep_pluck'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'database_cleaner'

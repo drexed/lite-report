@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'active_record'
-require 'deep_pluck'
 
 class Lite::Report::Record < Lite::Report::Base
 
@@ -44,9 +43,15 @@ class Lite::Report::Record < Lite::Report::Base
 
   def assign_export_data!
     columns = class_columns(@data)
-    @data = @data.result if ransack_class?(@data)
-    @data = @data.deep_pluck(*columns)
-    @data = [@data] if !@data.respond_to?(:each) || !@data.is_a?(Array)
+    @data = if ransack_class?(@data)
+              @data.result
+            elsif @data.try(:persisted?)
+              Array(@data)
+            else
+              @data
+            end
+
+    @data = @data.pluck(*columns).map { |values| columns.zip(values).to_h }
   end
 
   def generate_export!
@@ -60,7 +65,7 @@ class Lite::Report::Record < Lite::Report::Base
   end
 
   def timestamp
-    @timestamp ||= Time.respond_to?(:current) ? Time.current : Time.now
+    @timestamp ||= Time.try(:current) || Time.now
   end
 
   def created_at_timestamp?
