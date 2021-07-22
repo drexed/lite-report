@@ -5,11 +5,16 @@ require 'csv' unless defined?(CSV)
 require 'generators/lite/report/install_generator' if defined?(Rails::Generators)
 
 require 'lite/report/version'
-
-%w[converters encoders filters headers processors records transporters].each do |file_name|
-  require "lite/report/helpers/#{file_name}"
-end
-
-%w[configuration base array hash record exporter].each do |file_name|
-  require "lite/report/#{file_name}"
-end
+require 'lite/report/configuration'
+require 'lite/report/helpers/converters'
+require 'lite/report/helpers/encoders'
+require 'lite/report/helpers/filters'
+require 'lite/report/helpers/headers'
+require 'lite/report/helpers/processors'
+require 'lite/report/helpers/records'
+require 'lite/report/helpers/transporters'
+require 'lite/report/base'
+require 'lite/report/array'
+require 'lite/report/hash'
+require 'lite/report/record'
+require 'lite/report/exporter'
