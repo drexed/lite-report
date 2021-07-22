@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lite-report (1.3.0)
+    lite-report (1.3.1)
       activerecord
 
 GEM
